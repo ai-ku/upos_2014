@@ -1,0 +1,248 @@
+                                                                                                                                                                                                                                                               
+MIME-Version: 1.0
+Sender: denizyuret@gmail.com
+Received: by 10.112.61.39 with HTTP; Sun, 26 Feb 2012 23:58:07 -0800 (PST)
+In-Reply-To: <CACAd_eNvKoJ90YDYerRX=VN-4QOVs2sdPjHjdrAQSHzH3mnTDg@mail.gmail.com>
+References: <201202250934.q1P9Y1ZT006651@softconf.com>
+	<CACAd_eNRFiriga2B546NkCULB8NKs-YL6TE6ovCBS+J8+vCs2A@mail.gmail.com>
+	<-6376130782837871653@unknownmsgid>
+	<CACAd_eOF2B+sN1RdU_iTBzG2dHMudtuAAJ6BWQ=oPpHUT0Rmvw@mail.gmail.com>
+	<CACAd_eOhPu93v=s6tgax4rCLa0K6uyjTi5jg4q=650ZieHQ9kQ@mail.gmail.com>
+	<CAPY5T=c2Fqs1S-F_0SGPi9Fku9_M=N5uvtUvD4vdxN1XNu9_KA@mail.gmail.com>
+	<CACAd_eNvKoJ90YDYerRX=VN-4QOVs2sdPjHjdrAQSHzH3mnTDg@mail.gmail.com>
+Date: Mon, 27 Feb 2012 09:58:07 +0200
+Delivered-To: denizyuret@gmail.com
+X-Google-Sender-Auth: CxP-lBV1z1F83WKqOlcK80igVNs
+Message-ID: <CACAd_ePg0t=97wQzBvozZTTBh008xznzXPkd8Xb_Mr=fwqrQkg@mail.gmail.com>
+Subject: Re: authors Response Period
+From: Deniz Yuret <dyuret@ku.edu.tr>
+To: DENIZ YURET <denizyuret@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+
+START Conference Manager
+The 50th Annual Meeting of the Association for Computational Linguistics
+
+ACL 2012
+
+Author Response
+
+Title:	A Paradigmatic Model for Learning Syntactic Categories
+Authors:	Mehmet Ali Yatbaz, Enis Sert and Deniz Yuret
+Instructions
+
+The author response period has begun. The reviews for your submission
+are displayed on this page. If you want to respond to the points
+raised in the reviews, you may do so in the box provided below.
+
+Please note: you are not obligated to respond to the reviews.
+
+Review #1
+
+APPROPRIATENESS:	5
+CLARITY:	3
+ORIGINALITY/INNOVATIVENESS:	3
+SOUNDNESS/CORRECTNESS:	2
+MEANINGFUL COMPARISON:	2
+SUBSTANCE:	2
+IMPACT OF IDEAS OR RESULTS:	3
+REPLICABILITY:	3
+IMPACT OF ACCOMPANYING SOFTWARE:	1
+IMPACT OF ACCOMPANYING DATASET:	1
+RECOMMENDATION:	2
+REVIEWER CONFIDENCE:	4
+Comments
+
+This paper presents a method for unsupervised part-of-speech
+induction. The key idea is that instead of building context vectors to
+represent the words (vectors representing the contexts in which a word
+appears), they use substitution vectors (vectors representing the
+words which appear in the same contexts). I believe that such
+information is likely to be useful to many tasks. However, I believe
+the way it is applied and evaluated in this paper is problematic for
+the following reasons:
+
+1. The purpose of the paper is to compare paradigmatic against
+syntagmatic contexts in the context of unsupervised part-of-speech
+induction. In order to do this, the authors must employ the same
+clustering method using representations constructed either of these
+contexts. However, the authors developed their clustering method using
+only paradigmatic contexts and compare it against previous work which
+employs different clustering methods using syntagmatic contexts. As a
+result, the differences in performance observed cannot be attributed
+to the change of contexts used, as they might be due to the difference
+in clustering algorithms, therefore no conclusions can be drawn.
+
+2. In terms of evaluation, the authors use only many-to-one accuracy
+which as shown in Figure 3 it is biased towards clusterings with large
+numbers of clusters independently of whether this results in a class
+being split up in many clusters. For this purpose it is better to
+evaluate clusterings with methods that assess both of these aspects of
+clustering, namely homogeneity and completeness, such the V-measure.
+For an overview of clustering evaluation measures look in:
+
+V-Measure: A conditional entropy-based external cluster evaluation
+measure by Andrew Rosenberg and Julia Hirschberg, EMNLP 2007
+
+Also, note that clustering evaluation is rather difficult when done
+independently of the application context, as argued in:
+
+Vlachos, A. 2011. Evaluating unsupervised learning for natural
+language processing tasks, EMNLP 2011 Workshop on Unsupervised
+Learning in NLP
+
+So it would greatly improve the paper if more than one clustering
+evaluation methods used and/or extrinsic evaluation is performed.
+
+3. The authors claim that the proposed method is an improvement on the
+previous clustering-based models because it is not restricted by the
+one tag-per-word assumption. However, their state-of-the-art
+performance is achieved by enforcing this assumption, as described in
+Section 7. Without this modification the performance suffers
+substantially.
+
+4. The authors report that their method could not be applied to the
+whole of WSJ (1M tokens) but only to the first 24K tokens due to
+computational reasons. I think this is a serious drawback, especially
+since other methods report similar performance levels on the whole WSJ
+corpus.
+
+5. In the comparisons between distance metrics (section 4) and
+dimensionality reduction methods (section 5) there are various
+parameters that need tuning. The authors say that they were tuned
+"empirically", suggesting that the comparison among them is likely to
+be dependent on how well they could overfit the dataset used, thus it
+is not informative. Furthermore, it is unclear why these choices made
+using K-NN with K=30 are suitable for the clustering algorithms
+compared in section 6.
+
+In addition to the above, the literature review needs to be improved:
+
+1. The terms "paradigmatic" and "syntagmatic" need to be attributed to
+the PhD thesis of Magnus Sahlgren, 2006 which AFAIK gives a very
+thorough description of their meaning.
+
+2. I do not think that HMM-based methods should be considered
+syntagmatic. Sure, they look at the context of the word, but only one
+such context which is usually limited to the previous word. This is
+rather different than the standard use of syntagmatic vectors which
+are obtained by looking at a large number of occurrences of the word
+in a corpus.
+
+3. In 2011 there were two papers that reported state-of-the-art
+results on more than one languages including English that the authors
+should include in their literature review:
+
+- A Bayesian Mixture Model for Part-of-Speech Induction Using Multiple
+Features, Christos Christodoulopoulos, Sharon Goldwater and Mark
+Steedman, EMNLP 2011
+
+- A Hierarchical Pitman-Yor Process HMM for Unsupervised Part of
+Speech Induction, Phil Blunsom and Trevor Cohn. ACL, 2011.
+
+Review #2
+
+APPROPRIATENESS:	5
+CLARITY:	4
+ORIGINALITY/INNOVATIVENESS:	4
+SOUNDNESS/CORRECTNESS:	4
+MEANINGFUL COMPARISON:	4
+SUBSTANCE:	4
+IMPACT OF IDEAS OR RESULTS:	4
+REPLICABILITY:	5
+IMPACT OF ACCOMPANYING SOFTWARE:	1
+IMPACT OF ACCOMPANYING DATASET:	1
+RECOMMENDATION:	4
+REVIEWER CONFIDENCE:	4
+Comments
+
+This paper introduced a novel approach to word clustering by
+representing the context in which a word occurs as a high dimensional
+vector describing the probability of all possible substitutions for
+that word. Contexts rather than words are clustered and used to
+classify the PoS tag of a word position resulting in a many-to-one
+tagging accuracy of 59.4% with 45 clusters (the same as the number of
+tags in the tagset). This number is then increased to a maximum of
+70.8% when each word type is encouraged to live in only one context
+cluster through either 'collapsing' or the introduction of word
+penalties.
+
+Both collapsing and word penalties break the purely context-dependent
+nature of the clusters that are learnt. Both of these also
+significantly increase the accuracy of the clusters. I would like to
+see more discussion of how these change the predictions that are made.
+In particular, as I understand it, collapsing forces each word type to
+be associated with one of the 45 original clusters whereas before it
+could have been associated with multiple clusters given different
+contexts. This collapsing operation could reduce the number of PoS
+tags that could be predicted by the model. Are all 45 target PoS tags
+covered by the collapsed algorithm? Do all of the 45 context clusters
+have at least one word associated with them after the collapsing
+procedure? This is clearly a very effective operation but it is also
+one that is entirely at odds with the context driven approach adopted
+in the paper so I think it deserves greater exposition.
+
+The 70.8% many-to-one accuracy in this paper is a worthy result
+regardless of how it is achieved. I would, however, like to see a
+chart comparing this work to previous systems. At the moment this is
+done in different parts of the text. Also, as a note to the authors,
+they should make it very clear when this result is first mentioned
+that it is achieved using post processing on the clusters and that it
+therefore has nothing to do with Figure 3. At first glance I thought
+that the authors were reporting a result achieved using a 4K cluster
+set.
+
+Review #3
+
+APPROPRIATENESS:	5
+CLARITY:	3
+ORIGINALITY/INNOVATIVENESS:	3
+SOUNDNESS/CORRECTNESS:	3
+MEANINGFUL COMPARISON:	1
+SUBSTANCE:	3
+IMPACT OF IDEAS OR RESULTS:	3
+REPLICABILITY:	2
+IMPACT OF ACCOMPANYING SOFTWARE:	1
+IMPACT OF ACCOMPANYING DATASET:	1
+RECOMMENDATION:	3
+REVIEWER CONFIDENCE:	4
+Comments
+
+This paper presents a POS induction approach which uses paradigmatic
+information, by which the authors mean information about words that
+are similar to the context words used for POS clustering. This is by
+no means a novel idea; it is basically a variant of Schuetze's (1995)
+second-order co-occurences. On the positive side, the idea is well
+executed in this paper, with extensive experiments regarding the
+effect of different clustering and dimensionality reduction
+techniques..
+
+On the negative side, evaluation is weak. There is no comparison to
+other systems, despite of 20 years of research on POS induction. For
+example, Christodoulopoulos et al. 2010 present an extensive
+comparison of all major approaches and report 73.9 many-to-one
+accuracy for the best system. The approach presented here performs
+fairly well, but clearly falls short (70.82). No meaningful baselines
+are offered either, and crucially, no evaluation on other corpora or
+for other languages is given. (Unsupervised approaches really need to
+generalize to languages other than English to be credible, in my
+view).
+
+Finally, a more technical point: why do the authors only report
+many-to-one accuracy? The consensus in the literature seems to be that
+V-measures is a better metric to report; see again Christodoulopoulos
+et al. 2010 for a more detailed argumentation why.
+
+Reference
+
+Christos Christodoulopoulos, Sharon Goldwater, Mark Steedman. 2010.
+Two decades of unsupervised POS induction: How far have we come? In
+Proceedings of the Conference on Empirical Methods in Natural Language
+Processing. 2010.
+
+Submit Response
+
+Use the following box to enter your response to the reviews.
+
+
+
+START Conference Manager (V2.61.0 - Rev. 1641M)

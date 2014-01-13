@@ -1,0 +1,492 @@
+﻿Author Response:
+
+
+We sincerely thank all three reviewers for their careful reading of
+our paper and their valuable suggestions for improvements.  We would
+like to respond to some of their comments below.  First some general
+comments:
+
+
+We think our approach is (1) original, (2) gives promising results,
+and (3) invites further investigation which makes it worthy of
+publication:
+
+
+(1) Originality: Prior work in POS induction typically uses ad-hoc
+representations of context that are typically based on bigram
+statistics (see our comments on the Schutze comparison by the third
+reviewer below).  By employing a state of the art statistical language
+model we are able to provide a more accurate representation of context
+(The perplexity of the WSJ data based on a bigram model is approximately 140 whereas a 4-gram model reduces this to approximately 60 (Goodman, 2001).) and a more principled methodology to deal with data sparseness (based on decades of SLM smoothing work). Conceptually, associating parts-of-speech with groups of words that are substitutable in a wider context rather than groups that can follow or precede a single other word is more in line with linguists’ intuition. 
+
+
+To contrast with a typical paper published in this area, we just
+(positively) reviewed an unsupervised pos submission which (i) took an
+algorithm developed in 2007, (ii) added morphological features as
+first suggested in 2003, and (iii) improved the state of the art by
+0.7%.  We think we need to give conceptual advances a bit more
+exposure relative to incremental result improvements if we are to
+break out of the local maxima we seem to get stuck in as a field.
+
+
+(2) Promising results: Even though current computational limitations
+prevented us from obtaining results with larger corpora, our results
+surpass all published work that use up to 1M words of training data
+(Goldwater and Griffiths, 2007), (Johnson, 2007), (Gao and Johnson, 2008), (Maron et al 2010), (Lamar et al., 2010b), similar with (Lamar et al., 2010a).  Our results are better than any study published prior to year 2009 except (Clark 2003, 71.2%).   (Gao and Johnson, 2008) shows a 18% (33% on EM) improvement for Gibbs sampling from the smaller 24K word data to the larger 1M word data.  We think this makes ours a promising line of investigation even if the same level of improvement may not be achieved by our method using larger corpora.  Bigram based models have been around for 20 years and our paradigmatic model has reached a respectable level of performance after a relatively short period of study.  We think this approach deserves more attention.
+
+
+(3) Invites further work: The main drawback for our method, the
+computational difficulty of preparing substitute vectors, can be
+overcome with better algorithms.  Our group is working on a solution
+and we would like other groups to work on this problem as well.
+However this is unlikely to happen if we cannot get the exposure to
+convince people that this is a promising line of study.  A practical
+infrastructure to find likely substitutes efficiently would find
+applications not only in POS induction but provide potential
+improvements in every other area where vector space models are
+currently (based on ad-hoc features) used, e.g. word clustering, sense induction, automatic thesaurus generation, WSD, context-sensitive spelling correction, semantic role labeling, query expansion, information extraction and textual advertising (Turney and Pantel, 2010).  Again, we believe this promising line of study is less likely to be pursued by others if we don't get a chance to introduce it.  We think the ACL conference should serve as the forum for introducing new promising lines of research in addition to incremental improvements and finished work (for which journals are valid alternative venues).
+
+
+We would also like to respond to some reviewer comments:
+>
+> Review #1
+>
+> APPROPRIATENESS:        5
+> CLARITY:        3
+> ORIGINALITY/INNOVATIVENESS:     3
+> SOUNDNESS/CORRECTNESS:  2
+> MEANINGFUL COMPARISON:  2
+> SUBSTANCE:      2
+> IMPACT OF IDEAS OR RESULTS:     3
+> REPLICABILITY:  3
+> IMPACT OF ACCOMPANYING SOFTWARE:        1
+> IMPACT OF ACCOMPANYING DATASET: 1
+> RECOMMENDATION: 2
+> REVIEWER CONFIDENCE:    4
+> Comments
+>
+> This paper presents a method for unsupervised part-of-speech
+> induction. The key idea is that instead of building context vectors to
+> represent the words (vectors representing the contexts in which a word
+> appears), they use substitution vectors (vectors representing the
+> words which appear in the same contexts). I believe that such
+> information is likely to be useful to many tasks. However, I believe
+> the way it is applied and evaluated in this paper is problematic for
+> the following reasons:
+>
+> 1. The purpose of the paper is to compare paradigmatic against
+> syntagmatic contexts in the context of unsupervised part-of-speech
+> induction. In order to do this, the authors must employ the same
+> clustering method using representations constructed either of these
+> contexts. However, the authors developed their clustering method using
+> only paradigmatic contexts and compare it against previous work which
+> employs different clustering methods using syntagmatic contexts. As a
+> result, the differences in performance observed cannot be attributed
+> to the change of contexts used, as they might be due to the difference
+> in clustering algorithms, therefore no conclusions can be drawn.
+
+
+We agree with this comment in general but we think the verdict “therefore no conclusions can be drawn” is too strong.  There are a number of related studies (in Section 2 paragraph “Clustering and data sparsity” we summarize the methods that are similar to our method.) that apply dimensionality reduction followed by clustering that can be compared to our method.   The clustering method we have used (Spectral clustering which simply reduces the dimension using Laplacian eigenmaps and then applies k-means clustering) is a well-known and standard algorithm.  Given the variety of clustering methods applied to bigram based representations we think it is unlikely that much better results can be achieved without representational changes.  We think the studies below give a fairly good idea for the potential of using clustering methods with bigram based representations:
+
+
+(Schuetze 1995) extracts left and right context vectors and applies SVD then cluster the data into 200 clusters and uses the closest cluster centroid to assign each instance to its cluster.
+
+
+(Maron et al 2010) proposes S-Code which constructs a low dimensional embedding of the bigrams and then applies weighted k-means algorithm which achieves 68.8% m2o score.
+
+
+Similar to Schuetze (Lamar et al., 2010b) extract left and right context vectors and applies SVD to extract 500 clusters.  Then they extract left and right context vectors using these 500 clusters and reapply SVD.  Finally they perform weighted k-means clustering initialized with k frequent words.   They achieve 66% on 1M word data set.
+
+
+(Lamar et al., 2010a) proposes an iterative algorithm, in the spirit of the K-means clustering algorithm.  They first extracted the left and right context vectors and apply SVD to reduce the dimension and apply their iterative clustering method which is more sophisticated then the simple k-means algorithm and achieve 70.8% on 1M word data set.
+
+
+>
+> 2. In terms of evaluation, the authors use only many-to-one accuracy
+> which as shown in Figure 3 it is biased towards clusterings with large
+> numbers of clusters independently of whether this results in a class
+> being split up in many clusters. For this purpose it is better to
+> evaluate clusterings with methods that assess both of these aspects of
+> clustering, namely homogeneity and completeness, such the V-measure.
+> For an overview of clustering evaluation measures look in:
+>
+> V-Measure: A conditional entropy-based external cluster evaluation
+> measure by Andrew Rosenberg and Julia Hirschberg, EMNLP 2007
+>
+> Also, note that clustering evaluation is rather difficult when done
+> independently of the application context, as argued in:
+>
+> Vlachos, A. 2011. Evaluating unsupervised learning for natural
+> language processing tasks, EMNLP 2011 Workshop on Unsupervised
+> Learning in NLP
+>
+> So it would greatly improve the paper if more than one clustering
+> evaluation methods used and/or extrinsic evaluation is performed.
+>
+
+
+The main criticism of the many-to-one accuracy, namely that its score
+grows with increasing number of clusters, is not applicable when the
+number of clusters is kept equal to the number of  target categories
+as we have done.  On the positive side, we find the many-to-one score
+more intuitive and easier to understand compared to alternatives like
+V-measure.  However we have no objection to include alternative
+measures in the paper which we have already computed.  The same conclusions were also drawn by (Christodoulopoulos et al. 2010) in the last paragraphs of section 3.1 which we quote below to be helpful:
+“We conclude that there is probably no single evaluation measure that is best for all purposes. If a gold standard is available, then many-to-1 and 1-to-1 are the most intuitive measures, but should not be used
+when the number of clusters |C| is variable, and do not account for differences in the errors made.  While vi has been popular as an entropy-based alternative to address the latter problem, its scores are not easy to interpret (being on a scale of bits) and it still has the problem of incomparability across different |C|.”
+
+
+> 3. The authors claim that the proposed method is an improvement on the
+> previous clustering-based models because it is not restricted by the
+> one tag-per-word assumption. However, their state-of-the-art
+> performance is achieved by enforcing this assumption, as described in
+> Section 7. Without this modification the performance suffers
+> substantially.
+
+
+We experimented with two methods of increasing sparsity: collapsing
+and word-penalties.  The result mentioned above -- in which the strict
+one-tag-per-word is enforced -- is the collapsing result.  Importantly
+this result was achieved without the one-tag-per-word assumption
+during training, the constraint was introduced after training was
+complete (introducing it earlier leads to worse results).  Using word
+penalties we are able to introduce a bias rather than a constraint and
+allow some words to remain ambiguous.  We think this is important
+because at some point the learner (the child, or the disambiguation
+program) will have to come to terms with ambiguous words (many
+frequent words are) and approaches that depend on word types rather
+than tokens have no obvious way to generalize to handle ambiguity.
+
+
+>
+> 4. The authors report that their method could not be applied to the
+> whole of WSJ (1M tokens) but only to the first 24K tokens due to
+> computational reasons. I think this is a serious drawback, especially
+> since other methods report similar performance levels on the whole WSJ
+> corpus.
+
+
+We agree, and we would like to give ourselves (and other groups) an
+opportunity to work on this problem by getting a chance to introduce
+our approach.
+
+
+>
+> 5. In the comparisons between distance metrics (section 4) and
+> dimensionality reduction methods (section 5) there are various
+> parameters that need tuning. The authors say that they were tuned
+> "empirically", suggesting that the comparison among them is likely to
+> be dependent on how well they could overfit the dataset used, thus it
+> is not informative. Furthermore, it is unclear why these choices made
+> using K-NN with K=30 are suitable for the clustering algorithms
+> compared in section 6.
+
+
+Weighted KNN was performed to evaluate distance metrics for substitute vectors as a supervised baseline, with K up to 50. Baseline scores stabilized after 5 to 15 neighbors. K=30 was chosen, because it was in the stable region.  We performed dimension reduction for a large variety of parameters and observed only small differences. Notice that we present the final evaluation for the same neighbor count for all graph based algorithms which are not necessarily the highest scoring configuration. We are confident that we didn’t overfit the data, we just chose not to present every data point to save space.  However we can include this information if deemed necessary.
+
+
+>
+> In addition to the above, the literature review needs to be improved:
+>
+> 1. The terms "paradigmatic" and "syntagmatic" need to be attributed to
+> the PhD thesis of Magnus Sahlgren, 2006 which AFAIK gives a very
+> thorough description of their meaning.
+
+
+Thank you for this reference, we will include it in the next version.
+
+
+>
+> 2. I do not think that HMM-based methods should be considered
+> syntagmatic. Sure, they look at the context of the word, but only one
+> such context which is usually limited to the previous word. This is
+> rather different than the standard use of syntagmatic vectors which
+> are obtained by looking at a large number of occurrences of the word
+> in a corpus.
+
+
+HMMs use transition and emission probabilities.  The transition
+probabilities represent the context coarsely in terms of previously
+predicted tags.  These tags are predicted based on a model which has
+been trained on many similar word-context pairs.  However we agree
+that the relationship is indirect.  More importantly the "substitutes"
+in an HMM model are only the function of the currently predicted tag
+(through the emission probabilities) and are independent of everything
+else given the current tag.  This makes our paradigmatic model
+sufficiently different where the substitute vector may be influenced
+by subtle differences in the context.
+
+
+>
+> 3. In 2011 there were two papers that reported state-of-the-art
+> results on more than one languages including English that the authors
+> should include in their literature review:
+>
+> - A Bayesian Mixture Model for Part-of-Speech Induction Using Multiple
+> Features, Christos Christodoulopoulos, Sharon Goldwater and Mark
+> Steedman, EMNLP 2011
+>
+> - A Hierarchical Pitman-Yor Process HMM for Unsupervised Part of
+> Speech Induction, Phil Blunsom and Trevor Cohn. ACL, 2011.
+
+
+The paper by Blunsom and Cohn was already cited. Thanks for the other reference, we will include it in our next version.
+
+
+>
+> Review #2
+>
+> APPROPRIATENESS:        5
+> CLARITY:        4
+> ORIGINALITY/INNOVATIVENESS:     4
+> SOUNDNESS/CORRECTNESS:  4
+> MEANINGFUL COMPARISON:  4
+> SUBSTANCE:      4
+> IMPACT OF IDEAS OR RESULTS:     4
+> REPLICABILITY:  5
+> IMPACT OF ACCOMPANYING SOFTWARE:        1
+> IMPACT OF ACCOMPANYING DATASET: 1
+> RECOMMENDATION: 4
+> REVIEWER CONFIDENCE:    4
+> Comments
+>
+> This paper introduced a novel approach to word clustering by
+> representing the context in which a word occurs as a high dimensional
+> vector describing the probability of all possible substitutions for
+> that word. Contexts rather than words are clustered and used to
+> classify the PoS tag of a word position resulting in a many-to-one
+> tagging accuracy of 59.4% with 45 clusters (the same as the number of
+> tags in the tagset). This number is then increased to a maximum of
+> 70.8% when each word type is encouraged to live in only one context
+> cluster through either 'collapsing' or the introduction of word
+> penalties.
+>
+> Both collapsing and word penalties break the purely context-dependent
+> nature of the clusters that are learnt. Both of these also
+> significantly increase the accuracy of the clusters. I would like to
+> see more discussion of how these change the predictions that are made.
+
+
+To give some examples, before the collapsing  DTs (determiners) are separated to 5 different clusters almost equaly likely. After collapsing there are 4 different DT clusters and 2 of them is much more larger than the others.  Similarly the accuracy of NN* and JJ clusters are also increase after collapsing them.  Also punctuations are unified into one cluster after collapsing.  We did not include such anecdotal examples because we did not feel they presented anything unexpected however this could be easily remedied.
+
+
+> In particular, as I understand it, collapsing forces each word type to
+> be associated with one of the 45 original clusters whereas before it
+> could have been associated with multiple clusters given different
+> contexts. This collapsing operation could reduce the number of PoS
+> tags that could be predicted by the model. Are all 45 target PoS tags
+> covered by the collapsed algorithm? Do all of the 45 context clusters
+> have at least one word associated with them after the collapsing
+> procedure? This is clearly a very effective operation but it is also
+> one that is entirely at odds with the context driven approach adopted
+> in the paper so I think it deserves greater exposition.
+
+
+There are two tags missing in our 24K data and these are # and LS thus 
+initially the 24K data has 43 clusters.  LS and # tags are very rare in the 1M word Penn Treebank data and it is not surprising not to come across them in our data.  When we cluster the 24K word data (into 45 clusters) and collapse it, the final number of clusters is also 43.
+
+
+
+
+>
+> The 70.8% many-to-one accuracy in this paper is a worthy result
+> regardless of how it is achieved. I would, however, like to see a
+> chart comparing this work to previous systems. At the moment this is
+> done in different parts of the text. Also, as a note to the authors,
+> they should make it very clear when this result is first mentioned
+> that it is achieved using post processing on the clusters and that it
+> therefore has nothing to do with Figure 3. At first glance I thought
+> that the authors were reporting a result achieved using a 4K cluster
+> set.
+
+
+We agree, we will make these clarifications in the next version.
+
+
+>
+> Review #3
+>
+> APPROPRIATENESS:        5
+> CLARITY:        3
+> ORIGINALITY/INNOVATIVENESS:     3
+> SOUNDNESS/CORRECTNESS:  3
+> MEANINGFUL COMPARISON:  1
+> SUBSTANCE:      3
+> IMPACT OF IDEAS OR RESULTS:     3
+> REPLICABILITY:  2
+> IMPACT OF ACCOMPANYING SOFTWARE:        1
+> IMPACT OF ACCOMPANYING DATASET: 1
+> RECOMMENDATION: 3
+> REVIEWER CONFIDENCE:    4
+> Comments
+>
+> This paper presents a POS induction approach which uses paradigmatic
+> information, by which the authors mean information about words that
+> are similar to the context words used for POS clustering.
+
+
+This is actually not correct.  Paradigmatic information is related to
+words that can be substitutes for the target word, not the context
+words.
+
+
+> This is by
+> no means a novel idea; it is basically a variant of Schuetze's (1995)
+> second-order co-occurences.
+
+
+We disagree with this comment:
+1. Schuetze does not directly represent the substitute vectors he represents each word with its right and left contexts separately. Even in his second order co-occurences model he uses the bigram context vectors of the preceding and the following word of the target word.   We represent all the target words with substitute vectors (not with their bigram contexts) and we use left and right context of the word simultaneously while extracting substitutes.
+2. He counts left and right bigrams and apply SVD in an adhoc manner.  In contrast we use 4-gram language model and represent the possible substitutes as a probability vector. 
+
+
+
+
+> On the positive side, the idea is well
+> executed in this paper, with extensive experiments regarding the
+> effect of different clustering and dimensionality reduction
+> techniques..
+>
+> On the negative side, evaluation is weak. There is no comparison to
+> other systems, despite of 20 years of research on POS induction.
+
+
+We disagree with this comment, in our paper we report the following results:
+
+
+For the clustering based systems we report best m2o score as 70.8% (Lamar et al., 2010a) the rest of the methods are worse than this so we do not report them but we mentioned these methods in the text ((Schutze, 1995; Lamar et al., 2010b)
+
+
+We also report the performance for the basic EM model on 1M word data as 62% and the improvement over EM model with sparse priors as 66%. Moreover we also report results on 24K word dataset ( EM:28% and Gibbs with sparse priors:58%) (Gao and Johnson, 2008).  
+
+
+We report 68% m2o score of (Brown et al., 1992) as a baseline score and report the rest of the scores using this baseline since most of the models have extended this model.  Thus we report the improvements over the baseline of (Clark, 2003; Berg-Kirkpatrick and Klein, 2010; Blunsom and Cohn, 2011) as 3(~71%), 7(~75%) and 10%(~78%) . 
+
+
+
+
+> For
+> example, Christodoulopoulos et al. 2010 present an extensive
+> comparison of all major approaches and report 73.9 many-to-one
+> accuracy for the best system. The approach presented here performs
+> fairly well, but clearly falls short (70.82).
+
+
+We are copying our comment (2) from the introduction here:
+
+
+Even though current computational limitations
+prevented us from obtaining results with larger corpora, our results
+surpass all published work that use up to 1M words of training data
+(Goldwater and Griffiths, 2007), (Johnson, 2007), (Gao and Johnson, 2008), (Maron et al 2010), (Lamar et al., 2010b), similar with (Lamar et al., 2010a).  Our results are better than any study published prior to year 2009 except (Clark 2003, 71.2%).   (Gao and Johnson, 2008) shows a 18% (33% on EM) improvement for Gibbs sampling from the smaller 24K word data to the larger 1M word data.  We think this makes ours a promising line of investigation even if the same level of improvement may not be achieved by our method using larger corpora.  Bigram based models have been around for 20 years and our paradigmatic model has reached a respectable level of performance after a relatively short period of study.  We think this approach deserves more attention.
+
+
+> No meaningful baselines
+> are offered either,
+
+
+We disagree with this comment, almost half of our paper presents various baselines to put our results in context:
+
+
+We report the result of the generative model with sparse priors(58.2%) as a baseline on 24K data set. 
+
+
+We define a supervised baseline and use it to find out the upper bounds the unsupervised model with different distance, dimensionality reduction or clustering settings.
+
+
+In distance metric section, we apply supervised baseline function to select best metric.
+
+
+In dimensionality reduction section. we apply supervised baseline function in a wide range of different dimension to select best reduction method.  
+
+
+In clustering section, we compare the performances of different clustering algorithms to select the best one.
+
+
+
+
+
+
+> and crucially, no evaluation on other corpora or
+> for other languages is given. (Unsupervised approaches really need to
+> generalize to languages other than English to be credible, in my
+> view).
+
+
+We agree and we will generalize the approach in future work.
+
+
+>
+> Finally, a more technical point: why do the authors only report
+> many-to-one accuracy? The consensus in the literature seems to be that
+> V-measures is a better metric to report; see again Christodoulopoulos
+> et al. 2010 for a more detailed argumentation why.
+
+
+The main criticism of the many-to-one accuracy given in the above
+reference, namely that its score grows with increasing number of
+clusters, is not applicable when the number of clusters is kept equal
+to the number of  target categories as we have done.  On the positive
+side, we find the many-to-one score more intuitive and easier to
+understand compared to alternatives like V-measure.  However we have
+no objection to include alternative measures in the paper which we
+have already computed.  The same conclusions were also drawn by Christodoulopoulos et al. 2010 in last paragraphs of section 3.1 which
+we quote below to be helpful:
+“We conclude that there is probably no single evaluation measure that is best for all purposes. If a gold standard is available, then many-to-1 and 1-to-1 are the most intuitive measures, but should not be used
+when the number of clusters |C| is variable, and do not account for differences in the errors made.  While vi has been popular as an entropy-based alternative to address the latter problem, its scores are not easy to interpret (being on a scale of bits) and it still has the problem of incomparability across different |C|.”
+
+
+
+
+
+
+>
+> Reference
+>
+> Christos Christodoulopoulos, Sharon Goldwater, Mark Steedman. 2010.
+> Two decades of unsupervised POS induction: How far have we come? In
+> Proceedings of the Conference on Empirical Methods in Natural Language
+> Processing. 2010.
+References
+
+
+Taylor Berg-Kirkpatrick and Dan Klein. 2010. Phylogenetic grammar induction. In Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics, pages 1288–1297, Uppsala, Sweden, July.
+Association for Computational Linguistics.
+
+
+Phil Blunsom and Trevor Cohn. 2011. A hierarchical pitman-yor process hmm for unsupervised part of speech induction. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, pages 865–874, Portland, Oregon, USA, June. Association for Computational Linguistics.
+
+
+Peter F. Brown, Peter V. deSouza, Robert L. Mercer, Vincent J. Della Pietra, and Jenifer C. Lai. 1992. Class-based n-gram models of natural language. Comput. Linguist., 18:467–479, December.
+
+
+Christos Christodoulopoulos, Sharon Goldwater, Mark Steedman. 2010. Two decades of unsupervised POS induction: How far have we come? In  Proceedings of the Conference on Empirical Methods in Natural Language Processing. 2010.
+
+
+Alexander Clark. 2003. Combining distributional and morphological information for part of speech induction. In Proceedings of the tenth conference on European chapter of the Association for Computational
+Linguistics - Volume 1, EACL ’03, pages 59–66, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+
+Jianfeng Gao and Mark Johnson. 2008. A comparison of bayesian estimators for unsupervised hidden markov model pos taggers. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, EMNLP ’08, pages 344–352, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+
+Sharon Goldwater and Tom Griffiths. 2007. A fully bayesian approach to unsupervised part-of-speech tagging. In Proceedings of the 45th Annual Meeting of the Association of Computational Linguistics, pages 744–751, Prague, Czech Republic, June. Association for Computational Linguistics.
+
+
+Mark Johnson. 2007. Why doesn’t EM find good HMM POS-taggers? In Proceedings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning (EMNLP-CoNLL), pages 296–305, Prague, Czech Republic, June. Association for Computational Linguistics.
+
+
+Michael Lamar, Yariv Maron, and Elie Bienenstock. 2010a. Latent-descriptor clustering for unsupervised pos induction. In Proceedings of the 2010 Conference on Empirical Methods in Natural Language Processing, EMNLP ’10, pages 799–809, Stroudsburg, PA, USA. Association for Computational Linguistics.
+
+
+Michael Lamar, Yariv Maron, Mark Johnson, and Elie Bienenstock. 2010b. Svd and clustering for unsupervised pos tagging. In Proceedings of the ACL 2010 Conference Short Papers, pages 215–219, Uppsala, Sweden, July. Association for Computational Linguistics.
+
+
+Yariv Maron, Michael Lamar, Elie Bienenstock. 2010. Sphere Embedding: An Application to Part-ofSpeech Induction.  Neural Information Processing 
+Systems Conference (NIPS).
+
+
+Hinrich Schutze. 1995. Distributional part-of-speech tagging. In Proceedings of the seventh conference on European chapter of the Association for Computational Linguistics, EACL ’95, pages 141–148, San Francisco, CA, USA. Morgan Kaufmann Publishers Inc.
+
+
+Turney, P., & Pantel, P. (2010). From frequency to meaning: Vector space models of semantics. Artiﬁcial Intelligence Research, 37, 141–188.

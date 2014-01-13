@@ -1,0 +1,21 @@
+Warning: Unable to open display 'localhost:11.0'.  You will not be able to display graphics on the screen.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2010 The MathWorks, Inc.
+                Version 7.12.0.635 (R2011a) 64-bit (glnxa64)
+                               March 18, 2011
+
+
+	This is a Classroom License for instructional use only.
+	Research and commercial use is prohibited.
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+>> 
+Warning: You are using gcc version "4.6.3-1ubuntu5)".  The version
+         currently supported with MEX is "4.3.4".
+         For a list of currently supported compilers see: 
+         http://www.mathworks.com/support/compilers/current_release/
+
+>> 

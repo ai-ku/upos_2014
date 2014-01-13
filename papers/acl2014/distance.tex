@@ -1,0 +1,136 @@
+\subsection{Distance Metrics}
+\label{sec:dist}
+
+We represent each context with a sparse high dimensional probability
+vector called the substitute vector as described in the previous
+section.  In this section we compare various distance metrics in this
+high dimensional space with the goal of discovering one that will
+judge vectors that belong to the same syntactic category similar and
+vectors that belong to different syntactic categories distant.  The
+distance metrics we have considered are listed in
+Table~\ref{tab:metrics}.
+
+% we should remove KL2 metric from here, because we have sparse vectors
+% also update the table caption
+
+\begin{table}[ht] \centering
+%\small
+\caption{Similarity metrics.  JS is the Jensen-Shannon divergence and
+  KL2 is a symmetric implementation of Kullback-Leibler
+  divergence. Bold lower case letters represent vectors.}
+\begin{tabular}{|lll|}
+\hline
+%% Pretify this table norm numbers looks weird.
+Cosine($\mathbf{p}, \mathbf{q}$) & = & $<\mathbf{p},\mathbf{q}> / (\|\mathbf{p}\|_{_{2}} \|\mathbf{q}\|_{_{2}})$ \\
+Euclid($\mathbf{p}, \mathbf{q}$) & = & $\|\mathbf{p} - \mathbf{q}\|_{_{2}}$ \\
+Manhattan($\mathbf{p}, \mathbf{q}$) & = & $\|\mathbf{p} - \mathbf{q}\|_{_{1}}$ \\
+Maximum($\mathbf{p}, \mathbf{q}$) & = & $\|\mathbf{p} - \mathbf{q}\|_{_{\infty}}$ \\
+KL2($\mathbf{p}, \mathbf{q}$) & = & $\sum_i p_iln(p_i/q_i) + q_iln(q_i/p_i) $\\
+JS($\mathbf{p}, \mathbf{q}$) & = & $\sum_i p_iln(p_i/m_i) + q_iln(q_i/m_i) $\\
+& & where $m_i = 0.5(p_i + q_i)$\\
+%JS($\mathbf{p}, \mathbf{q}$) & = & KL2($\mathbf{p},0.5(\mathbf{p}+\mathbf{q})$)\\
+\hline
+\end{tabular}
+\label{tab:metrics}
+\end{table}
+
+% are we still using k = 30 ? update if necessary
+To judge the merit of each distance metric we obtained supervised
+baseline scores using leave-one-out cross validation and the weighted
+k-nearest-neighbor algorithm\footnote{Neighbors were weighted using
+  1/distance, $k=30$ was chosen empirically.} on the gold tags of the
+PTB24K.  The results are listed in
+Table~\ref{tab:distscores} sorted by score.
+
+% update scores in this table
+\begin{table}[h] \centering
+\caption{Supervised baseline scores with different distance metrics.
+  Log-metric indicates that metric applied to the log of the
+  probability vectors.}
+\begin{tabular}{|l|c|}
+\hline
+Metric & Accuracy \\
+\hline
+%% K=30 24K WSJ
+KL2 & .6889 \\
+Manhattan & .6865 \\
+Jensen & .6801 \\
+Cosine & .6706 \\
+Maximum & .6663 \\
+Euclid & .6255 \\
+log-Maximum & .5361 \\
+log-Cosine & .4847 \\
+log-Euclid & .4038 \\
+log-Manhattan & .3729 \\
+%% K=30 1M WSJ
+%% KL2 & ? \\
+%% Manhattan & .7354\\ %0.735381668919
+%% Jensen & .7317 \\ %0.731718247078
+%% Cosine & .7240 \\ %0.724018245545
+%% Maximum & .7204 \\ %0.720460466567
+%% Euclid & .6109 \\ %0.610962491672
+%% lg2-Maximum & ? \\
+%% lg2-Cosine & ? \\
+%% lg2-Euclid & ? \\
+%% lg2-Manhattan & ? \\
+\hline
+\end{tabular}
+\label{tab:distscores}
+\end{table}
+% K=1 1M WSJ
+% KL2 can we define kl2 on sparse vectors
+% Manhattan 
+% Jensen 0.684500999347
+% Cosine 0.672916918704
+% Maximum 
+% Euclid 0.597443613122
+% lg2-Maximum 
+% lg2-Cosine 
+% lg2-Euclid 
+% lg2-Manhattan 
+% K=20 1M WSJ
+% KL2 & ?\\
+% Manhattan & ?\\
+% Jensen & 0.732678404384\\
+% Cosine & 0.720252797472\\
+% Maximum & ?\\
+% Euclid & 0.617086369856\\
+% log-Maximum & ?\\
+% log-Cosine & ?\\
+% log-Euclid & ?\\
+% log-Manhattan & ?\\
+
+% update scores in this paragraph as well 
+The entries with the log-prefix indicate a metric applied to the log
+of the probability vectors.  Distance metrics on log probability
+vectors performed poorly compared to their regular counterparts
+indicating that differences in low probability words are relatively
+unimportant and high probability substitutes determine syntactic
+category.  The surprisingly good result achieved by the simple Maximum
+metric (which identifies the dimension with the largest difference
+between two vectors) also support this conclusion.  The maximum score
+of .68 can be taken as a rough upper bound for an unsupervised learner
+using this space on the PTB24K corpus because 32\% of the instances
+are assigned to the wrong part of speech by the majority of their
+closest neighbors.  We will discuss alternative ways to push this
+upper bound higher by enforcing a one-tag-per-word rule in
+Section~\ref{sec:clustering} and considering the context together with
+the co-occurring word type in Section~\ref{sec:code}.
+
+% moreover we are using probability vectors so its more natural to use
+% kl2
+
+%%%% Distance calcualtion on sparse 24K vectors
+% K=30
+% KL2 & ?\\
+% Manhattan & 0.694629475437\\
+% Jensen & 0.684554537885\\
+% Cosine & 0.668068276436\\
+% Maximum & 0.663821815154\\
+% Euclid & 0.639841798501\\
+% log-Maximum & ?\\
+% log-Cosine & ?\\
+% log-Euclid & ?\\
+% log-Manhattan & ?\\
+% Distance files are located at:
+% /work/upos_alllang/run.mali/test.wsj24k.knn[0,1,2,3,4].gz

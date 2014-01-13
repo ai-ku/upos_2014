@@ -1,0 +1,61 @@
+%%Multiple language section
+\begin{table*}[t]
+  \centering
+%% Table notation info
+%% PYP is \ddagger
+%% BMMM is \star
+%% Clark is \dagger
+%% kmeans is ^k
+%% 
+  \footnotesize 
+  \caption{The \mto\ and \vm\ scores on 19 corpora in 15 languages
+    together with the number of types and tags in the gold--set which
+    equals to number of induced clusters in all languages.  Best
+    published results are from
+    $^\ddagger$\protect\cite{blunsom-cohn:2011:ACL-HLT2011},
+    $^\star$\protect\cite{christodoulopoulos-goldwater-steedman:2011:EMNLP}
+    and $^\dagger$\protect\cite{Clark:2003:CDM:1067807.1067817}. Bold
+    results represent the best \mto\ and \vm\ accuracies of the
+    corresponding language with at least 90\% confidence level.
+    MULTEXT-East corpora do not tag the punctuation marks, thus we add
+  an extra tag for punctuation and represent it with ``+1''.}
+  \label{tab:multiresults}
+  \begin{flushleft}
+%  \begin{tabular}{|l|l|l|l|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \begin{tabular}{|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|@{ }c@{ }|@{ }c@{ }|@{ }c@{ }|@{ }c@{ }|@{ }c@{ }|}
+      \hline
+      & Language   &  Types   & Tags & \specialcell{Best\\ Published} &
+      \specialcell{Syntagmatic\\ Bigram} &{\em CLU-W}
+      & {\em CLU-W+O}            & {\em CLU-W+O+M}     \\ \hline % Multext data
+      \multirow{1}{*}{\begin{sideways}\textbf{WSJ}\end{sideways}} 
+      & English    & 49,190  & 45 & .775 / .697$^\ddagger$  &.7314 / .6558 & .7667 / .6819 & .7820 / .7020 &{\bf.8002 / .7163}           \\
+      & & & & & & & &\\ \hline
+      \multirow{8}{*}{\begin{sideways}\textbf{MULTEXT-East}\end{sideways}}
+      & Bulgarian    & 16,352  & 12+1 & .665 / .556$^\star$    & .6732 / .4119 & .6927 / .5341 & .6964 / .5469     & {\bf.7027} / .5513 \\
+      & Czech      & 19,115  & 12+1 & .642 / {\bf.539}$^\star$    & .6269 / .4586 & .7025 / .5020 & .7022 / .5047     & {\bf .7045} / .5096 \\
+      & English    & 9,773   & 12+1 & .733 / .633$^\star$    & .7690 /. 6131 & .8239 / .6631 & .8246 / .6696      & {\bf .8329} / {\bf.6769} \\
+      & Estonian   & 17,845  & 11+1 & .644 / {\bf.533}$^\star$    & .6089 / .4119 & .6612 / .4469 & {\bf.6704} / .4658     & .6445 / .4452 \\
+      & Hungarian  & 20,321  & 12+1 & .682 / {\bf.548}$^\star$    & .6181 / .4514 & .6900 / .4972 & .6963 / .5173     & {\bf.7254} / .5402 \\
+      & Romanian   & 15,189  & 14+1 & .611 / .523$^\star$    & .6565 / .5202 & .6412 / .5004 & {\bf .6607} / .5262     & .6432 / .5127 \\
+      & Slovene    & 17,871  & 12+1 & .679 / {\bf.567}$^\star$    & .6772 / .5044 & .6914 / .4951 & {\bf .6966} / .4998     & .6823 / .4938 \\
+      & Serbian    & 18,095  & 12+1 & .641 / {\bf.510}$\dagger$   & .6267 / .4510 & .6311 / .4536 & .6317 / .4557     & .6370 / .4648 \\
+      \hline % Conll06 data
+      \multirow{10}{*}{\begin{sideways}\textbf{CoNLL-X Shared Task}\end{sideways}}
+%        & Arabic     & 12,915  & 20 & -   & & - & -               & -  \\
+      & Bulgarian  & 32,439  & 54   & .704 / {\bf.596}$\dagger$        & .6972 / .5532 & .7328 / .5781  & {\bf.7348} / .5844     & .7321 / .5835 \\
+%        & Chinese    & 40,562  & 15 & -   & & & - & -           \\
+      & Czech      & 130,208 & 12   & .701$^\ddagger$ / .484$^\star$  & .6944 / .5036 & .6739 / .4838  & {\bf.7176} / {\bf.5336}     & .7039 / .5118 \\
+      & Danish     & 18,356  & 25   & .761$^\ddagger$ / .591$^\star$ & .6757 / .5290 & .7236 / .5583  & .7538 / .5962     & .7417 / .5919 \\
+      & Dutch      & 28,393  & 13   & .711$^\ddagger$ / .547$^\star$ & .6703 / .5205 & .6957 / .5331  & {\bf.7401} / {\bf.5986}     & .7210 / .5919 \\
+      & German     & 72,326  & 54   & .744$^\star$ / .630$\dagger$& .7525 / .6285 & .7669 / .6306  & {\bf.7799} / {\bf.6575}     & .7557 / .6395 \\
+%        & Japanese   & 3,231   & 80 & -   & - & - & -               & -           \\
+      & Portuguese & 28,931  & 22   & .785$^\ddagger$ / .639$^\star$ & .7031 / .5617 & .7439 / .5798  & .7901 / .6316     & .7861 / .6353 \\
+      & Slovene    & 7,128   & 29   & .642$^\star$ / {\bf.539}$\dagger$    & .6384 / .4976 & .6513 / .4957  & {\bf.6545} / .5093     & .6543 / .5031 \\
+      & Spanish    & 16,458  & 47   & {\bf.788}$^\ddagger$ / .632$^\star$          & .7086 / .5844 & .7479 / .6086  & .7712 / .6346     & .7588 / .6287 \\
+      & Swedish    & 20,057  & 41   & .682 / {\bf.589}$\dagger$        & .6721 / .5558 & .6962 / .5674  & {\bf.6962} / .5721     & .6675 / .5628 \\
+      & Turkish    & 17,563  & 30   & .628 / .408$^\star$        & .6069 / .3551 & .6239 / .3823  & .6372 / .4098 & {\bf.6487} / {\bf.4206} \\ \hline % extra data from cristo2011 paper
+%        & French     & 49,964  & 23 & - & & - & -               & -        \\
+%        & A.Greek    & 15,194  & 15 & - & & - & -               & -        \\ \hline
+    \end{tabular}
+  \end{flushleft}
+\end{table*}

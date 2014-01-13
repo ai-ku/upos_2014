@@ -1,0 +1,112 @@
+% TODO:
+% Add ``discovering natural categories'' to contributions (where did
+% PTB categories come from?).
+% Qualify which words improve with substitute clustering.
+% Add related work section to the end.
+%% ACL & TACL 
+\documentclass[11pt]{article}
+
+%% Computational Linguistic 
+%\documentclass{clv2}
+%\issue{?}{?}{2012}
+%\dochead{\date{}}
+%\runningtitle{Unsupervised Part of Speech Induction}
+%\runningauthor{Mehmet Ali Yatbaz}
+\usepackage{acl2012}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{pdflscape} %% more readable
+\usepackage{caption}
+\usepackage{placeins}
+\setlength\titlebox{6.5cm}
+\newcommand{\appendixsection}[1]{\addtocounter{section}{1}
+  \setcounter{table}{0}
+  \setcounter{figure}{0}
+  \setcounter{equation}{0}
+  \section*{Appendix \Alph{section}: #1}
+}
+% Table float box with bottom caption, box width adjusted to content
+%\usepackage{lscape} %% less readable
+%%% DY: Some consistency macros:
+
+% many-to-one abbreviation
+% 429 uses MTO
+% Lamar uses M-to-1
+% Maron uses MTO
+% Lamar uses MTO
+% Let us go with MTO
+\newcommand{\mto}{\mbox{MTO}}
+% Let us go with VM for V-measure
+\newcommand{\vm}{\mbox{VM}}
+% We need a standard way to refer to the unk token
+\newcommand{\unk}{\mbox{\textless unk\textgreater}}
+% Adopt the .7654 convention rather than percentages like 76.54%.
+% Define the results here for consistency
+%% Spectral results
+\newcommand{\spectralResult}{.5841}
+\newcommand{\collapseResult}{.6882}
+\newcommand{\spectralMtoPTB}{.5473}
+\newcommand{\spectralVmPTB}{.4686}
+\newcommand{\collapseMtoPTB}{.6834}
+\newcommand{\collapseVmPTB}{.5087}
+%% Scode resutls
+\newcommand{\bgmto}{.7319 (.0088)}
+\newcommand{\bgvm}{.6554 (.0039)}
+\newcommand{\rpmto}{.7554 (.0055)}
+\newcommand{\rpvm}{.6703 (.0037)}
+\newcommand{\wsmto}{.7667 (.0056)} %word based one-tag restricted
+\newcommand{\wsvm}{.6819 (.0029)} %word based one-tag restricted
+\newcommand{\ftmto}{.8045(.0051)} %word based + feature one-tag restricted
+\newcommand{\ftvm}{.7228 (.0038)} %word based + feature one-tag restricted
+\newcommand{\wsxymto}{.7346 (.0102)} %token based one-tag forced x+y
+\newcommand{\wsxyvm}{.6468 (.0081)} %token based one-tag forced x+y
+\newcommand{\fwsxymto}{.7952 (.0030)} %token based one-tag forced x+y
+\newcommand{\fwsxyvm}{.6908 (.0027)} %token based one-tag forced x+y
+\newcommand{\wsymto}{.6346 (.0032)} %token based y
+\newcommand{\wsyvm}{.4855 (.0027)} %token based y
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\title{Unsupervised Instance-Based Part of Speech Induction \\ Using Probable Substitutes}
+
+%% \author{Mehmet Ali Yatbaz \and Enis R{\i}fat Sert \and Deniz Yuret \\
+%% Ko\c{c} University Artificial Intelligence Laboratory, \.Istanbul \\
+%% {\tt\{myatbaz,esert,dyuret\}@ku.edu.tr}
+%% }
+
+\author{Author 1, Author 2, \and Author 3 \\
+Address Line \\
+{\tt\{email1,email2,email3\}@institution.edu}
+}
+
+\begin{document}
+\maketitle
+\input{abstract.tex}
+\input{introduction.tex}
+%\input{related.tex}
+\input{algorithm.tex}
+\input{experiments.tex}
+%% \input{features.tex}
+\input{token.tex}
+%\input{paradigma.tex}
+\input{multi.tex}
+\input{discussion.tex}
+%\input{representation.tex}
+\input{contribution.tex}
+\input{acknowledge.tex}
+\input{appendix.tex}
+
+% \newpage
+%% COMPUTATIONAL LINGUISTICS 
+%\bibliographystyle{fullname}
+
+\bibliographystyle{acl2012}
+\bibliography{upos}
+
+\end{document}

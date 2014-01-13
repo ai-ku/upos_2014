@@ -1,0 +1,52 @@
+\subsection{Paradigmatic vs Syntagmatic Representations of Word Context}
+\label{sec:pvss}
+
+To get a direct comparison of the paradigmatic and syntagmatic context
+representations we feed 4 different co-occurrences defined in
+Section~\ref{sec:representation} into the S-CODE algorithm.  The first
+model accepts word ($W$) - right bigram ($C$) pairs as the input, the
+second model accepts word ($W$) - left bigram($C$) pairs as the input,
+the third model accepts word ($W$) - concatenation of the left and
+right bigrams ($C$) pairs \cite{mintz2003frequent} as the input and
+the final model accepts words ($W$) - left bigram($C_1$) and right
+bigram ($C_2$) tuples \cite{20674613} as the input to the S-CODE.
+Finally, we cluster the word type embeddings ($W$) with k-means
+algorithm and report the results on Table \ref{tab:syntagmatic}.
+\begin{table*}[ht]
+\centering
+\caption{Summary of results in terms of the \mto\ and \vm\ scores of
+  the S-CODE algorithm when the paradigmatic or syntagmatic
+  representations are feed as an input.  Standard errors are given in
+  parentheses when available.  Results of the statistically best
+  performing system are written in bold.  We do not report the
+  original results of Maron et al. \protect\shortcite{maron2010sphere}
+  since our replication achieves higher accuracies.}
+\begin{tabular}{|l|l|l|}
+\hline
+Input & \mto & \vm\\
+\hline
+$W$ (word) - $C$ (right bigram) & .6625 (.0115) & .5809 (.0066)\\
+$W$ (word) - $C$ (left bigram) & .6604 (.0054) & .5983 (.0028)\\
+$W$ (word) - $C$ (left and right bigram concatenation) & .7268 (.0091) & .6416 (.0052)\\
+$W$ (word) - $C_1$, $C_2$ (left and right bigrams) & .7173 (.0061) & .6381 (.0032)\\
+Maron et al. \shortcite{maron2010sphere}(replication)  & \bgmto & \bgvm \\
+$W$ (word) - $C$ (random substitutes) & {\bf\wsmto} & {\bf\wsvm} \\
+\hline
+\end{tabular}
+\label{tab:syntagmatic}
+\end{table*}
+
+To replicate the work of Maron et al. \shortcite{maron2010sphere} we
+feed word ($W$) - right bigram ($C$) pairs as the input.  At the end
+each word $w$ in the vocabulary ends up with two points on the sphere,
+a $\phi_w$ point representing the behavior of $w$ as the left word of
+a bigram and a $\psi_w$ point representing it as the right word.  The
+two vectors for $w$ are concatenated to create a 50-dimensional
+representation at the end.  These 50-dimensional vectors are clustered
+using the k-means algorithm.  Maron et al. \shortcite{maron2010sphere}
+report many-to-one scores of .6880 (.0016) for 45 clusters and .7150
+(.0060) for 50 clusters (on the PTB).  Using our default settings the
+bigram model achieves \bgmto\ \mto\ and \bgvm\ \vm\ accuracies.  Table
+\ref{tab:syntagmatic} summarizes all the results and shows that the
+paradigmatic representation accuracies are significantly higher than
+the syntagmatic representation \mto\ and \vm\ accuracies.

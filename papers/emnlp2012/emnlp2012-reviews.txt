@@ -1,0 +1,437 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: denizyuret@gmail.com
+Received: by 10.112.96.180 with SMTP id dt20csp132306lbb;
+        Fri, 18 May 2012 14:47:36 -0700 (PDT)
+Received: from mr.google.com ([10.50.185.165])
+        by 10.50.185.165 with SMTP id fd5mr1958367igc.46.1337377656275 (num_hops = 1);
+        Fri, 18 May 2012 14:47:36 -0700 (PDT)
+Received: by 10.50.185.165 with SMTP id fd5mr1958367igc.46.1337377656275;
+        Fri, 18 May 2012 14:47:36 -0700 (PDT)
+Received: by 10.50.185.165 with SMTP id fd5mr1958352igc.46.1337377655585;
+        Fri, 18 May 2012 14:47:35 -0700 (PDT)
+Return-Path: <start@max.softconf.com>
+Received: from softconf.com (softconf.com. [209.97.213.77])
+        by mx.google.com with ESMTPS id z9si6440349icy.73.2012.05.18.14.47.34
+        (version=TLSv1/SSLv3 cipher=OTHER);
+        Fri, 18 May 2012 14:47:35 -0700 (PDT)
+Received-SPF: pass (google.com: domain of start@max.softconf.com designates 209.97.213.77 as permitted sender) client-ip=209.97.213.77;
+Authentication-Results: mx.google.com; spf=pass (google.com: domain of start@max.softconf.com designates 209.97.213.77 as permitted sender) smtp.mail=start@max.softconf.com
+Received: from softconf.com (localhost.localdomain [127.0.0.1])
+	by softconf.com (8.13.8/8.13.8) with ESMTP id q4ILlYv3019451;
+	Fri, 18 May 2012 14:47:34 -0700
+Received: (from www@localhost)
+	by softconf.com (8.13.8/8.13.8/Submit) id q4ILlX1a019449;
+	Fri, 18 May 2012 14:47:33 -0700
+Date: Fri, 18 May 2012 14:47:33 -0700
+Message-Id: <201205182147.q4ILlX1a019449@softconf.com>
+Sender: start@max.softconf.com
+From: emnlp-conll2012@unige.ch
+X-START-Originating: emnlp-conll2012@unige.ch
+MIME-Version: 1.0
+To: dyuret@ku.edu.tr
+CC: emnlp-conll2012@unige.ch
+Subject: Your EMNLP-CoNLL 2012  Submission (Number 475)
+Content-Type: multipart/mixed; boundary="-STARTBoundary--070708040102010306080701"
+
+This is a multi-part message in MIME format.
+---STARTBoundary--070708040102010306080701
+Content-Type: text/plain; charset=UTF-8
+
+Dear Deniz Yuret:
+
+On behalf of the EMNLP-CoNLL 2012  Program Committee, we are delighted 
+to inform you that the following submission has been accepted 
+by the conference as an oral presentation:
+
+ Learning Syntactic Categories Using Paradigmatic
+           Representations of Word Context
+ Mehmet Ali Yatbaz, Enis Sert and Deniz Yuret
+
+The Program Committee worked hard to thoroughly review
+all the submitted papers. Please repay their efforts, by 
+following their suggestions when you revise your paper.
+
+To upload your final manuscript, please visit the following 
+site:
+
+     https://www.softconf.com/c/emnlpconll2012main/
+
+and, on the left-hand side of the page, enter the passcode 
+associated with your submission. Your passcode is:
+
+     475X-A2B7E6H2H2
+
+Alternatively, you can click on the following URL, which will take you 
+directly to a form to submit your final paper:
+
+     https://www.softconf.com/c/emnlpconll2012main/cgi-bin/scmd.cgi?scmd=aLogin&passcode=475X-A2B7E6H2H2
+
+The deadline for submitting the final manuscript is June 3,
+11:59pm PST (California time zone; UTC/GMT - 8).
+
+Regardless of the presentation format, all accepted submissions
+will be treated the same with respect to preparing the proceedings.
+Final submissions are 9 pages long not including references, using the
+ACL 2012 style files. Formatting guidelines are also available on
+the conference website http://emnlp-conll2012.unige.ch/.
+
+The reviews and comments are attached below, along with a separate
+explanation of scoring guidelines. Congratulations on your fine work.
+It has been our pleasure serving the authors contributing to the
+conference. If you have questions, please let us know.
+
+Best regards,
+James Henderson and Marius Pasca, PC Chairs 
+EMNLP-CoNLL 2012 
+http://emnlp-conll2012.unige.ch/
+
+============================================================================ 
+EMNLP-CoNLL 2012  Reviews for Submission #475
+============================================================================ 
+
+Title: Learning Syntactic Categories Using Paradigmatic Representations of Word Context
+
+Authors: Mehmet Ali Yatbaz, Enis Sert and Deniz Yuret
+============================================================================
+                            REVIEWER #1
+============================================================================ 
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+                                 Clarity: 5
+            Originality / Innovativeness: 4
+                 Soundness / Correctness: 5
+      References / Meaningful Comparison: 5
+              Impact of Ideas or Results: 5
+                     Impact of Resources: 5
+                          Recommendation: 5
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The paper presents a method to learn unsupervised syntactic categories by
+combining 2 ideas: exploiting paradigmatic representations of context and
+smoothing the context data using an embedding method.
+
+The paper explains how "substitute" vectors are computed for words in context,
+a substitute vector is computed efficiently for each word instance in the
+corpus.
+(It refers to a self-citation to the FASTSUBS algorithm which is a key
+component of the approach.)  The method is clear except for 1 minor point:
+- How are boundary cases handled (with an +4/-4 words window there are
+different ways to handle sentence boundaries)
+
+Section 4 presents the Co-occurrence Data Embedding method in a clear and
+self-contained manner.                    
+
+Section 5 presents empirical results: this is very well done, the experiments
+move in 3 steps: the bigram model is described as a template method (this
+method derives a set number of clusters from an examination of word bigrams. 
+This section was a bit short to be self-contained, and I had to read Maron et
+al 2010 to properly understand it.  The paper presents technical improvement
+over the results reported in Maron et al 2010 by fine-tuning the parameters of
+the method.
+
+It then presents 2 variations of this method that exploit the substitution
+vector models learned earlier.                    The 2 methods are intuitive, and
+very
+well
+described.  Both improve the baseline significantly, demonstrating the
+appropriateness of the substitution vectors representation.  The stability of
+the method is verified as parameters are carefully optimized.
+
+Finally, the model is expanded by introducing additional features in addition
+to the distributional data encoded in the substitution vectors.  The paper
+first outlines an extension of the CODE method to handle multiple features and
+then introduces unsupervised morphological learned using Morfessor and
+orthographic features.                    
+
+The combination of substitution vectors and those features achieves state of
+the art results in the task of unsupervised POS induction with many to one
+mapping evaluation.
+
+Excellent error analysis is provided that indicates the strength of the method.
+
+This is an excellent paper reporting in-depth analysis, comprehensive previous
+work review, empirical data and state of the art results.  The linguistic
+intuition is clear, and the technical formulation enhances the understanding of
+the linguistic data.  The authors promise distribution of the code and datasets
+which is of significant interest for many other tasks.                    (As the
+authors
+mention
+as the end of Section 3, the substitution vector representation certainly
+deserves being used as feature to enable followup analyses that currently rely
+on POS tags -- certainly dependency parsing using this type of information begs
+to be tried as an extrinsic evaluation -- this is exciting future work.)
+
+The paper relies on significant previous work (FASTSUBS algorithm, S-CODE
+method) but is still readable as a standalone piece - which is well
+appreciated.
+
+I have 3 technical clarification questions:
+- The question mentioned above about the boundary cases for the computation of
+substitution vectors.
+- I was surprised to see orthographic features do not include All-caps and
+contains-number (instead of just "starts with number"). I would also have
+thought the number of letters in the word would be beneficial.
+
+- The motivation to use S-CODE should be explained before going into it -- it
+took me time to understand why S-CODE is presented and how it was going to be
+used.  If I understand correctly, S-CODE is used because the substitution
+vectors are just too sparse to be clustered effectively.  Hence S-CODE performs
+dimensionality reduction before clustering.  
+
+Can you confirm that clustering directly substitution vectors yields poor
+results? 
+
+Are there other ways to achieve dimensionality reduction that you tried?
+
+An alternative might be to represent each word type vector as the sum or mean
+of all its token occurrences vectors, and then cluster these directly. This
+might be better than sampling with repetition: you will get to use also the
+less frequent subs, but they will have a smaller effect.
+
+Do you need to cancel the effect of some words having more substitutions than
+others?
+
+============================================================================
+                            REVIEWER #2
+============================================================================ 
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+                                 Clarity: 5
+            Originality / Innovativeness: 3
+                 Soundness / Correctness: 4
+      References / Meaningful Comparison: 4
+              Impact of Ideas or Results: 3
+                     Impact of Resources: 3
+                          Recommendation: 3.5
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper proposes a method of syntactic category induction by
+representing a word by means of other words than can be substituted in
+the contexts in which it appears (paradigmatic representation). The
+vector of these substitutable words are then clustered using an
+embedding algorithms (S-CODE).
+
+This is a well-written and technically sound paper, and the idea of
+paradigmatic representation of words is somewhat novel and interesting.
+Unfortunately, the paper suffers from a very narrow scope in the evaluation
+section. The authors
+claim that studying category induction is important for work on under-resourced
+languages, and for modeling
+child language acquisition. This is convincing. But the only dataset
+the model is tested on (Wall Street Journal) is clearly inappropriate
+for either of those goals. If this research is to have impact beyond
+"yet another way to tag WSJ a little bit better" it would need to take
+its own motivation seriously, and show that the findings hold for
+languages other than English (especially under-resourced) and domains
+other than financial news. It would be a more justifiable limitation
+if this was a pioneering paper in part of speech induction, but not
+after more than two decades of research on this problem. Such an
+evaluation would have been quite easy: Christodoulopoulos 2011 run
+their system on 22 datasets in as many languages. The fact that the
+method in this paper outperforms Christodoulopoulos 2011 on a single
+relatively uninteresting dataset is not very convincing.
+
+At the end of Section 3 the authors note that the quality of learned
+categories when compared against gold POS tags is not necessarily a
+good indication of how useful they are for applications, but limit the
+evaluation to comparison to POS tags in order to "follow previous
+work". The is not a good justification, and anyway there is plenty of
+previous work which does evaluate the quality of induced word classes
+when used as features in an end-to-end task, starting with Miller et
+al. 2004 and including much of recent research on feature learning and
+semi-supervised learning.  I would suggest that the current paper
+could benefit from familiarity with this body of research.
+
+Minor remarks:
+
+The discussion of work in modeling child syntactic category
+acquisition is very outdated: more recent research includes among others
+Parisien et al. 2008 and Chrupala and Alishahi 2010. 
+
+Also, both these are token-based clustering approached, contra the
+claim that clustering methods are mostly type-based.
+
+Broken reference for the FASTSUBS algorithm is section 3
+
+============================================================================
+                            REVIEWER #3
+============================================================================ 
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         Appropriateness: 5
+                                 Clarity: 5
+            Originality / Innovativeness: 4
+                 Soundness / Correctness: 5
+      References / Meaningful Comparison: 5
+              Impact of Ideas or Results: 4
+                     Impact of Resources: 4
+                          Recommendation: 5
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This is very nice paper that explores the use of paradigmatic representations
+of word context in unsupervised part-of-speech induction. The experimental
+results show that the addition of paradigmatic information improves the state
+of the art both for strictly distributional models and models that rely on
+additional word features. The paper combines novel ideas with stringent
+argumentation, carefully designed experiments, insightful analysis and crystal
+clear exposition. 
+
+The error analysis seems to reveal that some of the "errors" correspond to
+alternative divisions with more fine-grained categories (auxiliary verbs vs.
+main verbs, articles vs. other determiners). Presumably, if the number of
+categories is fixed by the number of categories in the gold standard, such
+"errors" will at the same time force other categories to be merged, leading to
+a kind of error propagation. It would therefore be interesting to run
+experiments with different numbers of categories, although this would require a
+different kind of evaluation.
+
+It is also interesting to see that the gold tag that seems to be most scattered
+over different clusters is RB, reflecting the well-known fact that the
+traditional category of adverb is a rather heterogeneous class of words that do
+not fit into any of the other major categories.
+
+Minor comment:
+
+Syntactic citations should have the form "Name (Year)", not "(Name, Year)".
+
+---STARTBoundary--070708040102010306080701
+Content-Type: text/plain;
+  name="review-form-scores.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+  filename="review-form-scores.txt"
+
+QXBwcm9wcmlhdGVuZXNzICgxLTUpCi0tLS0tLS0tLS0tLS0tLS0tLS0tLQoKRG9lcyB0aGlzIHBh
+cGVyIGZpdCBpbiBFTU5MUC1Db05MTCAyMDEyPwoKNSA9IEFwcHJvcHJpYXRlIGZvciBFTU5MUC1D
+b05MTC4gKG1vc3Qgc3VibWlzc2lvbnMpCjQgPSBDb21wdXRhdGlvbmFsIGxpbmd1aXN0aWNzIG9y
+IE5MUCwgdGhvdWdoIGl0J3Mgbm90IHR5cGljYWwgRU1OTFAtQ29OTEwKbWF0ZXJpYWwuCjMgPSBQ
+b3NzaWJseSByZWxldmFudCB0byB0aGUgYXVkaWVuY2UsIHRob3VnaCBpdCdzIG5vdCBxdWl0ZSBj
+b21wdXRhdGlvbmFsCmxpbmd1aXN0aWNzIG9yIE5MUAoyID0gT25seSBtYXJnaW5hbGx5IHJlbGV2
+YW50LgoxID0gSW5hcHByb3ByaWF0ZS4KCkNsYXJpdHkgKDEtNSkKLS0tLS0tLS0tLS0tLQoKRm9y
+IHRoZSByZWFzb25hYmx5IHdlbGwtcHJlcGFyZWQgcmVhZGVyLCBpcyBpdCBjbGVhciB3aGF0IHdh
+cyBkb25lIGFuZCB3aHk/CklzIHRoZSBwYXBlciB3ZWxsLXdyaXR0ZW4gYW5kIHdlbGwtc3RydWN0
+dXJlZD8gRG9lcyB0aGUgRW5nbGlzaCBvciB0aGUKbWF0aGVtYXRpY3MgbmVlZCBjbGVhbmluZyB1
+cD8gV291bGQgdGhlIGV4cGxhbmF0aW9uIGJlbmVmaXQgZnJvbSBtb3JlCmV4YW1wbGVzIG9yIHBp
+Y3R1cmVzP0lzIHRoZXJlIHN1ZmZpY2llbnQgZGV0YWlsIGZvciBhbiBleHBlcnQgdG8gdmFsaWRh
+dGUKdGhlIHdvcmssIGkuZS4sIGJ5IHJlcGxpY2F0aW5nIGV4cGVyaW1lbnRzIG9yIGZpbGxpbmcg
+aW4gdGhlb3JldGljYWwgc3RlcHM/Cgo1ID0gQWRtaXJhYmx5IGNsZWFyLgo0ID0gVW5kZXJzdGFu
+ZGFibGUgYnkgbW9zdCByZWFkZXJzLgozID0gTW9zdGx5IHVuZGVyc3RhbmRhYmxlIHRvIG1lIHdp
+dGggc29tZSBlZmZvcnQuCjIgPSBJbXBvcnRhbnQgcXVlc3Rpb25zIHdlcmUgaGFyZCB0byByZXNv
+bHZlIGV2ZW4gd2l0aCBlZmZvcnQuCjEgPSBNdWNoIG9mIHRoZSBwYXBlciBpcyBjb25mdXNpbmcu
+CgpPcmlnaW5hbGl0eSAvIElubm92YXRpdmVuZXNzCigxLTUpCi0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0KCkhvdyBvcmlnaW5hbCBpcyB0aGUgYXBwcm9hY2g/IERvZXMgdGhpcyBw
+YXBlciBicmVhayBuZXcgZ3JvdW5kIGluIHRvcGljLAptZXRob2RvbG9neSwgb3IgY29udGVudD8g
+SG93IGV4Y2l0aW5nIGFuZCBpbm5vdmF0aXZlIGlzIHRoZSByZXNlYXJjaCBpdApkZXNjcmliZXM/
+Cgo1ID0gU3VycHJpc2luZzogTm90ZXdvcnRoeSBuZXcgcHJvYmxlbSwgdGVjaG5pcXVlLCBtZXRo
+b2RvbG9neSwgb3IgaW5zaWdodC4KNCA9IENyZWF0aXZlOiBSZWxhdGl2ZWx5IGZldyBwZW9wbGUg
+aW4gb3VyIGNvbW11bml0eSB3b3VsZCBoYXZlIHB1dCB0aGVzZQppZGVhcyB0b2dldGhlci4KMyA9
+IFNvbWV3aGF0IGNvbnZlbnRpb25hbDogQSBudW1iZXIgb2YgcGVvcGxlIGNvdWxkIGhhdmUgY29t
+ZSB1cCB3aXRoIHRoaXMKaWYgdGhleSB0aG91Z2h0IGFib3V0IGl0IGZvciBhIHdoaWxlLgoyID0g
+UmF0aGVyIGJvcmluZzogT2J2aW91cywgb3IgYSBtaW5vciBpbXByb3ZlbWVudCBvbiBmYW1pbGlh
+ciB0ZWNobmlxdWVzLgoxID0gU2lnbmlmaWNhbnQgcG9ydGlvbnMgaGF2ZSBhY3R1YWxseSBiZWVu
+IGRvbmUgYmVmb3JlIG9yIGRvbmUgYmV0dGVyLgoKU291bmRuZXNzIC8gQ29ycmVjdG5lc3MgKDEt
+NSkKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkZpcnN0LCBpcyB0aGUgdGVjaG5pY2Fs
+IGFwcHJvYWNoIHNvdW5kIGFuZCB3ZWxsLWNob3Nlbj8gU2Vjb25kLCBjYW4gb25lCnRydXN0IHRo
+ZSBjbGFpbXMgb2YgdGhlIHBhcGVyIC0tIGFyZSB0aGV5IHN1cHBvcnRlZCBieSBwcm9wZXIgZXhw
+ZXJpbWVudHMsCnByb29mcywgb3Igb3RoZXIgYXJndW1lbnRhdGlvbj8gKEJlYXIgaW4gbWluZCB0
+aGF0IHRoaXMgaXMgYSA5LXBhZ2UKY29uZmVyZW5jZSBwYXBlciwgbm90IGEgam91cm5hbCBhcnRp
+Y2xlKS4KCjUgPSBUaGUgYXBwcm9hY2ggaXMgdmVyeSBhcHQsIGFuZCB0aGUgY2xhaW1zIGFyZSBj
+b252aW5jaW5nbHkgc3VwcG9ydGVkLgo0ID0gR2VuZXJhbGx5IHNvbGlkIHdvcmssIHRob3VnaCBJ
+IGhhdmUgYSBmZXcgc3VnZ2VzdGlvbnMgYWJvdXQgaG93IHRvCnN0cmVuZ3RoZW4gdGhlIHRlY2hu
+aWNhbCBhcHByb2FjaCBvciBldmFsdWF0aW9uLgozID0gRmFpcmx5IHJlYXNvbmFibGUgd29yay4g
+VGhlIGFwcHJvYWNoIGlzIG5vdCBiYWQsIGFuZCBhdCBsZWFzdCB0aGUgbWFpbgpjbGFpbXMgYXJl
+IHByb2JhYmx5IGNvcnJlY3QsIGJ1dCBJIGFtIG5vdCBlbnRpcmVseSByZWFkeSB0byBhY2NlcHQg
+dGhlbQooYmFzZWQgb24gdGhlIG1hdGVyaWFsIGluIHRoZSBwYXBlcikuCjIgPSBUcm91Ymxlc29t
+ZS4gVGhlcmUgYXJlIHNvbWUgaWRlYXMgd29ydGggc2FsdmFnaW5nIGhlcmUsIGJ1dCB0aGUgd29y
+awpzaG91bGQgcmVhbGx5IGhhdmUgYmVlbiBkb25lIG9yIGV2YWx1YXRlZCBkaWZmZXJlbnRseSwg
+b3IganVzdGlmaWVkIGJldHRlci4KMSA9IEZhdGFsbHkgZmxhd2VkLgoKUmVmZXJlbmNlcyAvIE1l
+YW5pbmdmdWwgQ29tcGFyaXNvbgooMS01KQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tCgpBcmUgdGhlIHJlZmVyZW5jZXMgYWRlcXVhdGU/IERvZXMgdGhlIGF1dGhvciBt
+YWtlIGNsZWFyIHdoZXJlIHRoZSBwcm9ibGVtcwphbmQgbWV0aG9kcyBzaXQgd2l0aCByZXNwZWN0
+IHRvIGV4aXN0aW5nIGxpdGVyYXR1cmU/IEFyZSBhbnkgZXhwZXJpbWVudGFsCnJlc3VsdHMgbWVh
+bmluZ2Z1bGx5IGNvbXBhcmVkIHdpdGggdGhlIHRoZSBiZXN0IHByaW9yIGFwcHJvYWNoZXM/Cgo1
+ID0gUHJlY2lzZSBhbmQgY29tcGxldGUgY29tcGFyaXNvbiB3aXRoIHJlbGF0ZWQgd29yay4gR29v
+ZCBqb2IgZ2l2ZW4gdGhlCnNwYWNlIGNvbnN0cmFpbnRzLgo0ID0gTW9zdGx5IHNvbGlkIGJpYmxp
+b2dyYXBoeSBhbmQgY29tcGFyaXNvbiwgYnV0IEkgaGF2ZSBzb21lIHN1Z2dlc3Rpb25zLgozID0g
+QmlibGlvZ3JhcGh5IGFuZCBjb21wYXJpc29uIGFyZSBzb21ld2hhdCBoZWxwZnVsLCBidXQgaXQg
+Y291bGQgYmUgaGFyZApmb3IgYSByZWFkZXIgdG8gZGV0ZXJtaW5lIGV4YWN0bHkgaG93IHRoaXMg
+d29yayByZWxhdGVzIHRvIHByZXZpb3VzIHdvcmsuCjIgPSBPbmx5IHBhcnRpYWwgYXdhcmVuZXNz
+IGFuZCB1bmRlcnN0YW5kaW5nIG9mIHJlbGF0ZWQgd29yaywgb3IgYSBmbGF3ZWQKZW1waXJpY2Fs
+IGNvbXBhcmlzb24uCjEgPSBMaXR0bGUgYXdhcmVuZXNzIG9mIHJlbGF0ZWQgd29yaywgb3IgbGFj
+a3MgbmVjZXNzYXJ5IGVtcGlyaWNhbApjb21wYXJpc29uLgoKSW1wYWN0IG9mIElkZWFzIG9yIFJl
+c3VsdHMgKDEtNSkKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkhvdyBzaWduaWZp
+Y2FudCBpcyB0aGUgd29yayBkZXNjcmliZWQ/IElmIHRoZSBpZGVhcyBhcmUgbm92ZWwsIHdpbGwg
+dGhleQphbHNvIGJlIHVzZWZ1bCBvciBpbnNwaXJhdGlvbmFsPyBJZiB0aGUgcmVzdWx0cyBhcmUg
+c291bmQsIGFyZSB0aGV5IGFsc28KaW1wb3J0YW50PwoKNSA9IFdpbGwgYWZmZWN0IHRoZSBmaWVs
+ZCBieSBhbHRlcmluZyBvdGhlciBwZW9wbGUncyBjaG9pY2Ugb2YgcmVzZWFyY2gKdG9waWNzIG9y
+IGJhc2ljIGFwcHJvYWNoLgo0ID0gU29tZSBvZiB0aGUgaWRlYXMgb3IgcmVzdWx0cyB3aWxsIHN1
+YnN0YW50aWFsbHkgaGVscCBvdGhlciBwZW9wbGUncwpvbmdvaW5nIHJlc2VhcmNoLgozID0gSW50
+ZXJlc3RpbmcgYnV0IG5vdCB0b28gaW5mbHVlbnRpYWwuIFRoZSB3b3JrIHdpbGwgYmUgY2l0ZWQs
+IGJ1dCBtYWlubHkKZm9yIGNvbXBhcmlzb24gb3IgYXMgYSBzb3VyY2Ugb2YgbWlub3IgY29udHJp
+YnV0aW9ucy4KMiA9IE1hcmdpbmFsbHkgaW50ZXJlc3RpbmcuIE1heSBvciBtYXkgbm90IGJlIGNp
+dGVkLgoxID0gV2lsbCBoYXZlIG5vIGltcGFjdCBvbiB0aGUgZmllbGQuCgpJbXBhY3Qgb2YgUmVz
+b3VyY2VzICgxLTUpCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KCkluIGFkZGl0aW9uIHRvIGl0
+cyBkaXJlY3QgaW50ZWxsZWN0dWFsIGNvbnRyaWJ1dGlvbnMsIGRvZXMgdGhlIHBhcGVyCnByb21p
+c2UgdG8gcmVsZWFzZSBhbnkgbmV3IHJlc291cmNlcywgc3VjaCBhcyBhbiBpbXBsZW1lbnRhdGlv
+biwgYSB0b29sa2l0LApvciBuZXcgZGF0YT8gSWYgc28sIGlzIGl0IGNsZWFyIHdoYXQgd2lsbCBi
+ZSByZWxlYXNlZCBhbmQgd2hlbj8gSWYgc28sIHdpbGwKdGhlc2UgcmVzb3VyY2VzIGJlIHZhbHVh
+YmxlIHRvIG90aGVycyBpbiB0aGUgZm9ybSBpbiB3aGljaCB0aGV5IGFyZQpyZWxlYXNlZD8gRG8g
+dGhleSBmaWxsIGFuIHVubWV0IG5lZWQ/IEFyZSB0aGV5IGF0IGxlYXN0IHN1ZmZpY2llbnQgdG8K
+cmVwbGljYXRlIG9yIGJldHRlciB1bmRlcnN0YW5kIHRoZSByZXNlYXJjaCBpbiB0aGUgcGFwZXI/
+Cgo1ID0gRW5hYmxpbmc6IFRoZSBuZXdseSByZWxlYXNlZCByZXNvdXJjZXMgc2hvdWxkIGFmZmVj
+dCBvdGhlciBwZW9wbGUncwpjaG9pY2Ugb2YgcmVzZWFyY2ggb3IgZGV2ZWxvcG1lbnQgcHJvamVj
+dHMgdG8gdW5kZXJ0YWtlLgo0ID0gVXNlZnVsOiBJIHdvdWxkIHJlY29tbWVuZCB0aGUgbmV3IHJl
+c291cmNlcyB0byBvdGhlciByZXNlYXJjaGVycyBvcgpkZXZlbG9wZXJzIGZvciB0aGVpciBvbmdv
+aW5nIHdvcmsuCjMgPSBQb3RlbnRpYWxseSB1c2VmdWw6IFNvbWVvbmUgbWlnaHQgZmluZCB0aGUg
+bmV3IHJlc291cmNlcyB1c2VmdWwgZm9yCnRoZWlyIHdvcmsuCjIgPSBEb2N1bWVudGFyeTogVGhl
+IG5ldyByZXNvdXJjZXMgYXJlIHVzZWZ1bCB0byBzdHVkeSBvciByZXBsaWNhdGUgdGhlCnJlcG9y
+dGVkIHJlc2VhcmNoLCBhbHRob3VnaCBmb3Igb3RoZXIgcHVycG9zZXMgdGhleSBtYXkgaGF2ZSBs
+aW1pdGVkCmludGVyZXN0IG9yIGxpbWl0ZWQgdXNhYmlsaXR5LiAodGhpcyBpcyBhIHBvc2l0aXZl
+IHJhdGluZykKMSA9IE5vIHVzYWJsZSByZXNvdXJjZXMgcmVsZWFzZWQuIChtb3N0IHN1Ym1pc3Np
+b25zKQoKUmVjb21tZW5kYXRpb24KLS0tLS0tLS0tLS0tLS0KClRoZXJlIGFyZSBtYW55IGdvb2Qg
+c3VibWlzc2lvbnMgY29tcGV0aW5nIGZvciBzbG90cyBhdCBFTU5MUC1Db05MTCAyMDEyOwpob3cg
+aW1wb3J0YW50IGlzIGl0IHRvIGZlYXR1cmUgdGhpcyBvbmU/IFdpbGwgcGVvcGxlIGxlYXJuIGEg
+bG90IGJ5IHJlYWRpbmcKdGhpcyBwYXBlciBvciBzZWVpbmcgaXQgcHJlc2VudGVkPwoKSW4gZGVj
+aWRpbmcgb24geW91ciB1bHRpbWF0ZSByZWNvbW1lbmRhdGlvbiwgcGxlYXNlIHRoaW5rIG92ZXIg
+YWxsIHlvdXIKc2NvcmVzIGFib3ZlLiBCdXQgcmVtZW1iZXIgdGhhdCBubyBwYXBlciBpcyBwZXJm
+ZWN0LCBhbmQgcmVtZW1iZXIgdGhhdCB3ZQp3YW50IGEgY29uZmVyZW5jZSBmdWxsIG9mIGludGVy
+ZXN0aW5nLCBkaXZlcnNlLCBhbmQgdGltZWx5IHdvcmsuIElmIGEgcGFwZXIKaGFzIHNvbWUgd2Vh
+a25lc3NlcywgYnV0IHlvdSByZWFsbHkgZ290IGEgbG90IG91dCBvZiBpdCwgZmVlbCBmcmVlIHRv
+IGZpZ2h0CmZvciBpdC4gSWYgYSBwYXBlciBpcyBzb2xpZCBidXQgeW91IGNvdWxkIGxpdmUgd2l0
+aG91dCBpdCwgbGV0IHVzIGtub3cgdGhhdAp5b3UncmUgYW1iaXZhbGVudC4gUmVtZW1iZXIgYWxz
+byB0aGF0IHRoZSBhdXRob3IgaGFzIGEgY291cGxlIG9mIHdlZWtzIHRvCmFkZHJlc3MgcmV2aWV3
+ZXIgY29tbWVudHMgYmVmb3JlIHRoZSBjYW1lcmEtcmVhZHkgZGVhZGxpbmUuCgpTaG91bGQgdGhl
+IHBhcGVyIGJlIGFjY2VwdGVkIG9yIHJlamVjdGVkPwoKNSA9IEV4Y2l0aW5nOiBJJ2QgZmlnaHQg
+dG8gZ2V0IGl0IGFjY2VwdGVkCjQgPSBXb3J0aHk6IEkgd291bGQgbGlrZSB0byBzZWUgaXQgYWNj
+ZXB0ZWQKMyA9IEJvcmRlcmxpbmU6IEknbSBhbWJpdmFsZW50IGFib3V0IHRoaXMgb25lCjIgPSBN
+ZWRpb2NyZTogSSdkIHJhdGhlciBub3Qgc2VlIGl0IGluIHRoZSBjb25mZXJlbmNlCjEgPSBQb29y
+OiBJJ2QgZmlnaHQgdG8gaGF2ZSBpdCByZWplY3RlZAoKVXNlIGFuIGludGVnZXIgc2NvcmUgKDEt
+NSkgaWYgeW91IGNhbiwgYnV0IGlmIHlvdSBoYXZlIHRyb3VibGUgY2hvb3Npbmcgb25lCm9mIHRo
+ZSBhYm92ZSBvcHRpb25zLCBoYWxmLXBvaW50cyBhcmUgYWxsb3dlZC4K
+---STARTBoundary--070708040102010306080701--

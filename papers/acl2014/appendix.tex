@@ -1,0 +1,234 @@
+%% \section{Co-occurrence Modeling}
+%% \label{sec:code}
+
+\appendix
+%% %%\appendixsection{Algorithm}
+%% %%\label{sec:algorithm}
+%% %% [!! remove this part]
+%% %% In this section, we briefly describe the components of our algorithm.
+%% %% Section~\ref{sec:subcomp} presents the motive and the method for
+%% %% computation of substitute vectors, our paradigmatic representations
+%% %% for the word contexts.  We combine the substitute vectors with the
+%% %% identity and features of the target word for part of speech induction
+%% %% using the a co-occurrence modeling framework.
+%% 
+%% \appendixsection{Computation of Substitute Distributions}
+%% \label{app:subcomp}
+%% 
+%% In this study, we predict the syntactic category of a word in a given
+%% context based on its substitute distribution.  The sample space of the
+%% substitute distribution is the vocabulary of the language model
+%% including the unknown word tag \unk.  Note that the substitute
+%% distribution is a function of the context only and is indifferent to
+%% the target word.
+%% 
+%% %% The dimensions of the
+%% %% substitute distribution represent words in the vocabulary of the
+%% %% language model, and the entries in the substitute distribution
+%% %% represent the probability of those words being used in the given
+%% %% context.  
+%% 
+%% % how are the substitutes computed
+%% It is best to use both the left and the right context when estimating
+%% the probabilities for potential lexical substitutes.  For example, in
+%% \emph{``He lived in San Francisco suburbs.''}, the instance \emph{San}
+%% would be difficult to guess from the left context but it is almost
+%% certain looking at the right context.  We define $c_w$ as the $2n-1$
+%% word window centered around the target word position: $w_{-n+1} \ldots
+%% w_0 \ldots w_{n-1}$ ($n=4$ is the n-gram order we have used).  The
+%% probability of a substitute word $w$ in a given context $c_w$ can be
+%% estimated as:
+%% \begin{eqnarray}
+%%   \label{eq:lm1}P(w_0 = w | c_w) & \propto & P(w_{-n+1}\ldots w_0\ldots w_{n-1})\\
+%%   \label{eq:lm2}& = & P(w_{-n+1})P(w_{-n+2}|w_{-n+1})\nonumber\\
+%%   &&\ldots P(w_{n-1}|w_{-n+1}^{n-2})\\
+%%   \label{eq:lm3}& \approx & P(w_0| w_{-n+1}^{-1})P(w_{1}|w_{-n+2}^0)\nonumber\\
+%%   &&\ldots P(w_{n-1}|w_0^{n-2})
+%% \end{eqnarray}
+%% where $w_i^j$ represents the sequence of words $w_i w_{i+1} \ldots
+%% w_{j}$.  In Equation \ref{eq:lm1}, $P(w|c_w)$ is proportional to
+%% $P(w_{-n+1}\ldots w_0 \ldots w_{n-1})$ because the words of the
+%% context are fixed.  Terms without $w_0$ are identical for each
+%% substitute in Equation \ref{eq:lm2} therefore they have been dropped
+%% in Equation \ref{eq:lm3}.  Finally, because of the Markov property of
+%% n-gram language model, only the closest $n-1$ words are used in the
+%% experiments.
+%% 
+%% Near the sentence boundaries the appropriate terms were truncated in
+%% Equation \ref{eq:lm3}.  Specifically, at the beginning of the sentence
+%% shorter n-gram contexts were used and at the end of the sentence terms
+%% beyond the end-of-sentence instance were dropped.
+%% 
+%% To obtain a discrete representation of the context, the
+%% random-substitutes algorithm pairs each word instance with a substitute
+%% sampled from the pre-computed substitute distribution generated from
+%% the word instance's context and then word ($W$) -- random-substitute
+%% ($S$) pairs are fed to the S-CODE algotihm as input.
+%% 
+%% \appendixsection{The CODE and S-CODE Models}
+%%  \label{app:codethr}
+%%  {\bf This section will be remoded after Dyuret's tuple sampling comments}
+%% In this section we review the unsupervised method that we use to model
+%% co-occurrence statistics: the Co-occurrence Data Embedding (CODE)\
+%% \cite{globerson2007euclidean} method and its spherical extension (S-CODE)
+%% introduced by \cite{maron2010sphere}.
+%% 
+%% Let $W$ and $C$ be two categorical variables with finite cardinalities
+%% $|W|$ and $|C|$.  We observe a set of pairs $\{w_i, c_i\}_{i=1}^n$
+%% drawn IID from the joint distribution of $W$ and $C$.  The basic idea
+%% behind CODE and related methods is to represent (embed) each value of
+%% $W$ and each value of $C$ as points in a common Euclidean space
+%% $\mathbf{R}^d$ such that values that frequently co-occur lie close to
+%% each other.  There are several ways to formalize the relationship
+%% between the distances and co-occurrence statistics, in this paper we
+%% use the following:
+%% \begin{equation} \label{eq:probability}
+%% p(w,c) = \frac{1}{Z} \bar{p}(w) \bar{p}(c) e^{-d^2_{w,c}}
+%% \end{equation}
+%% \noindent where $d^2_{w,c}$ is the squared distance between the
+%% embeddings of $w$ and $c$, $\bar{p}(w)$ and $\bar{p}(c)$ are empirical
+%% probabilities, and $Z=\sum_{w,c} \bar{p}(w) \bar{p}(c) e^{-d^2_{w,c}}$
+%% is a normalization term.  If we use the notation $\phi_w$ for the
+%% point corresponding to $w$ and $\psi_c$ for the point corresponding to
+%% $c$ then $d^2_{w,c} = \|\phi_w-\psi_c\|^2$.  The log-likelihood of a
+%% given embedding $\ell(\phi, \psi)$ can be expressed as:
+%% \begin{eqnarray}
+%% &&\ell(\phi, \psi) = \sum_{w,c} \bar{p}(w,c) \log p(w,c) \label{eq:likelihood} \\
+%% &&= \sum_{w,c} \bar{p}(w,c) (-\log Z + \log \bar{p}(w)\bar{p}(c) - d^2_{w,c}) \nonumber \\
+%% &&= -\log Z + \mathit{const} - \sum_{w,c} \bar{p}(w,c) d^2_{w,c} \nonumber
+%% \end{eqnarray}
+%% The likelihood is not convex in $\phi$ and $\psi$.  We use gradient
+%% ascent to find an approximate solution for a set of $\phi_w$, $\psi_c$
+%% that maximize the likelihood.  The gradient of the $d^2_{w,c}$ term
+%% pulls neighbors closer in proportion to the empirical joint
+%% probability:
+%% \begin{equation}
+%% \frac{\partial}{\partial\phi_w} \sum_{w,c} -\bar{p}(w,c) d^2_{w,c} =
+%% \sum_y 2 \bar{p}(w,c) (\psi_c - \phi_w) \label{eq:attract}
+%% \end{equation}
+%% The gradient of the $Z$ term pushes neighbors apart in proportion to the
+%% estimated joint probability:
+%% \begin{equation}
+%% \frac{\partial}{\partial\phi_x} (-\log Z) = \sum_y 2 p(w,c) (\phi_w -
+%% \psi_c) \label{eq:repulse}
+%% \end{equation}
+%% Thus the net effect is to pull pairs together if their estimated
+%% probability is less than the empirical probability and to push them
+%% apart otherwise.  The gradients with respect to $\psi_c$ are similar.
+%% S-CODE \cite{maron2010sphere} additionally restricts all $\phi_w$ and
+%% $\psi_c$ to lie on the unit sphere.  With this restriction, $Z$ stays
+%% around a fixed value during gradient ascent.  This allows S-CODE to
+%% substitute an approximate constant $\tilde{Z}$ in gradient
+%% calculations for the real $Z$ for computational efficiency.  In our
+%% experiments, we used S-CODE with its sampling based stochastic
+%% gradient ascent algorithm and smoothly decreasing learning rate.
+%%  
+\appendixsection{S-CODE with More than Two Variables}
+\label{app:multiscode}
+In this section we modify the S-CODE model to handle more than two variables. 
+Let $W$ and $F^{(i)}$, where $i=1\ldots K$, be $K+1$ categorical
+variables with finite cardinalities $|W|$ and $|F^{(i)}|$.  We observe a set of
+tuples $\{w_j, f^{(1)}_j, \hdots, f^{(K)}_j\}_{j=1}^n$ drawn IID from the joint
+distribution $\bar{p}(w, f^{(1)}, \hdots, f^{(K)})$, respectively.
+Globerson et.  al \shortcite{globerson2007euclidean} suggest the following
+likelihood function:
+
+\begin{table}[ht]
+  \footnotesize
+  \begin{eqnarray}
+    \ell(\phi, \psi^{(1)}, \ldots, \psi^{(K)}) =  \label{eq:multicode}
+    \sum_{i=1}^K \sum_{w,f^{(i)}} \bar{p}(w,f^{(i)}) \log p(w,f^{(i)})
+  \end{eqnarray}
+\end{table}
+\noindent where $\bar{p}(w, f^{(i)})$ is the empirical joint distribution of
+$W$ with feature $F^{(i)}$ whose empirical joint distribution is known.  The
+likelihood then represents a set of S-CODE models $p(w,f^{(i)})$ where each
+$F^{(i)}$ has an embedding $\psi_f^{(i)}$ and all models share the same
+$\phi_w$ embedding.
+
+With this setup, the training procedure needs to change little: instead of
+sampling a word ($w$) -- context ($c$), the word ($w$) -- feature $f^{(1)}$ --
+$\hdots$ -- $f^{(K)}$ tuple is sampled and input to the gradient ascent
+algorithm.  The gradient search algorithm updates the embeddings according to
+$p(w,f^{(i)})$ and no updates are performed between any features since $w$ is
+the only shared variable.
+
+Tuples might have null values due to unobserved features.  For example in the
+case of POS induction, the word ``\textbf{car}'' has no morphological or
+orthographic features therefore all the elements of the tuple have null value
+except the word type ($w$) and the contextual feature ($f_1$).  We do not
+perform any pull or push updates on embeddings during the gradient search if
+the corresponding $f^{(i)}$ is null.  In our setup $w$ and $f_1$ represents the
+word type and contextual feature therefore they are always observed.
+
+%% \appendixsection{Language Statistics}
+%% \label{app:language}
+%% This section explains the language model training and feature
+%% extraction of each language that we apply our model in
+%% Section~\ref{sec:multilang}.  
+
+%% \paragraph{Statictical Language Modeling}For all languages except
+%% Serbian, English and Turkish, we train the language models by using
+%% the corresponding Wikipedia dump files\footnote{Latest Wikipedia dump
+%%   files are freely available at \url{http://dumps.wikimedia.org/} and
+%%   the text in the dump files can be extracted using WP2TXT
+%%   (\url{http://wp2txt.rubyforge.org/})}.  Serbian shares a common
+%% basis with Croatian and Bosnian therefore we trained 3 different
+%% language models using Wikipedia dump files of Serbian together with
+%% these two languages and measured the perplexities on the MULTEXT-East
+%% Serbian corpus.  We chose the Croatian language model since it
+%% achieved the lowest perplexity score and unknown word ratio on the
+%% MULTEXT-East Serbian corpus.  To train the statistical language model
+%% of English, we use Wall Street Journal data (1987-1994) extracted from
+%% CSR-III Text \cite{csr3text} (excluding sections of the PTB) and for
+%% the Turkish language modeling we use the web corpus collected from
+%% Turkish news and blog sites \cite{sak2008turkish}.  
+%% 
+%% In order to reduce the unknown word ratio of resource poor languages
+%% and to standardize the process we set the vocabulary threshold to 2
+%% for all languages except English.  English has a relatively low
+%% unknown word ratio therefore we set the threshold to 20 instead of 2.
+%% Table~\ref{tab:lmstatistics} summarizes the language model related
+%% statistics and scores that vary across the languages in terms of
+%% quality and quantity.
+
+%% \paragraph{Feature extraction}Morphological features of each language
+%% are extracted using the training sections of the corresponding
+%% MULTEXT-East and CoNLL-X corpora.  We don't use the language model
+%% corpora to extract morphological features.  Number of morphological
+%% feature of each language is presented in Table~\ref{tab:lmstatistics}.
+%% We use the same set of orthographic features described in
+%% Section~\ref{sec:feat} except we add an ``Only-Punctuation'' feature
+%% to the languages of MULTEXT-East corpora.  The ``Only-Punctuation''
+%% feature is generated when a instance only consists of punctuation
+%% characters.
+%% 
+%% \input{datatable.tex}
+%% S-CODE handles two variables, whereas underlying syntactic categories
+%% can be captured by more than two different variables such as
+%% contextual, morphologic and ortographic features.  S-CODE can be
+%% extented to handle more than two variables in a way similar to the
+%% multi variable extension of CODE \cite{globerson2007euclidean} with
+%% the unit sphere restriction.  The log-likelihood at
+%% Equation~\ref{eq:likelihood} can be redefined for $n+1$ different
+%% categorical variables $X$, $Y_i$, $\hdots$ and $Y_n$ with finite
+%% cardinalities $|X|$, $|Y_1|$, $\hdots$ and $|Y_n|$, respectively, as:
+%% \begin{eqnarray}
+%% &&\ell(\phi, \psi_1,\hdots,\psi_n) = \sum_{i=1}^n\sum_{x,y_i} \bar{p}(x,y_i) \log p(x,y_i) \label{eq:multiscode} \\
+%% &&= \sum_{i=1}^n\sum_{x,y_i} \bar{p}(x,y_i) (-\log Z_i + \log \bar{p}(x)\bar{p}(y_i) - d^2_{x,y_i}) \nonumber \\
+%% &&=-\sum_{i=1}^n(\log Z_i + \mathit{const}_i - \sum_{x,y_i} \bar{p}(x,y_i) d^2_{x,y_i}) \nonumber
+%% \end{eqnarray}
+%% where $\psi_i$ is the embedding of $y_i \in Y_i$ and $Z_i$ is the
+%% normalization term of $p(x,y_i)$.  Thus the model is able to jointly
+%% learn the embeddings when the pairwise co-occurence statistics,
+%% $\bar{p}(x,y_i)$, are available for all $i$.
+
+%% One problem with these setting is, not every $(x,y_i)$ pair is
+%% observed in the data.  For example, the stem word ``\textbf{car}''
+%% doesn't have any morphological feature, thus its morphological feature
+%% is represented by a null value, ``X''.  However setting the unobserved
+%% features to ``X'' leads to pulling the words with unobserved features
+%% together even they are from different clusters or pushing the ones
+%% with observed features apart even they are from same clusters.  To
+%% solve this, during the gradient search we don't perform any pull or
+%% push updates on embeddings if the value of $y_i$ is set to null.

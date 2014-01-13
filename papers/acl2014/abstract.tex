@@ -1,0 +1,37 @@
+%% todo: can we mention type/token here without confusing everyone?
+
+\begin{abstract}
+%% 1- what:instance based 
+%% 2- how we do:
+%% 3- our performance
+
+  We introduce an unsupervised, {\em instance-based} part-of-speech
+  induction system that gives state of the art results in 15
+  languages.  The system successfully handles highly ambiguous words
+  which pose a challenge to {\em word-based} induction systems that
+  constrain or strongly bias each word to have a single part-of-speech
+  category.  We use probable substitutes of each word instance as
+  contextual features.  Words and their contextual, orthographic and
+  morphological features are embedded in a high-dimensional Euclidean
+  space where distances are used to model their joint distribution.
+  To represent a word instance we concatenate its word embedding with
+  the average of its contextual feature embeddings.  Our instance
+  based system scores 79.5\% many-to-one accuracy on the Penn Treebank
+  and achieves results that are significantly better than or
+  comparable to the best published systems on 12 out of 19 corpora in
+  15 languages.
+
+%%We investigate paradigmatic representations of word context in the
+%%domain of unsupervised part of speech induction.  Paradigmatic representations
+%%of word context are based on potential substitutes of a word in contrast to
+%%syntagmatic representations based on its neighbors.  We model the joint
+%%probability of words and their contexts (as represented by potential
+%%substitutes) using the S-CODE framework.  S-CODE maps target words, their
+%%potential substitutes and other features to high dimensional Euclidean vectors.
+%%These vectors aggregate into clusters that largely match the traditional
+%%part-of-speech boundaries and give state-of-the-art results in unsupervised
+%%part-of-speech induction, including 80\% many-to-one accuracy on the Penn
+%%Treebank and statistically significant improvements over best published results
+%%on 17 out of 19 corpora in 15 languages.
+
+\end{abstract}

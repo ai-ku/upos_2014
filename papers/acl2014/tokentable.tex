@@ -1,0 +1,47 @@
+%%Multiple language section
+\begin{table*}[ht]
+%% Table notation info
+%% PYP is \ddagger
+%% BMMM is \start
+%% Clark is \dagger
+%% kmeans is ^k
+%% 
+%  \small
+  \centering
+  \caption{The \mto\ and \vm\ scores of X+Y token clustering S-CODE on
+    19 corpora in 15 languages together with the number of unique words and
+    tags in gold--set which equals to number of induced clusters in
+    all languages.  MULTEXT-East corpora do not tag the punctuation
+    marks, thus we add an extra tag for punctuation and represent it
+    with ``+1''.}
+%  \begin{tabular}{|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|@{ }l@{ }|}
+  \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+        & Language   & Types    & Tags & S-CODE X & S-CODE X+Y \\ \hline % Multext data
+        \multirow{1}{*}{\begin{sideways}\textbf{WSJ}\end{sideways}} 
+        & English    & 49,190  & 45 & .7667 / .6819 &.7030 / .6006\\
+        & & & & &\\ \hline
+        \multirow{8}{*}{\begin{sideways}\textbf{MULTEXT-East}\end{sideways}}
+        & Bulgarian  & 16,352  & 12+1 & .6927 / .5341 & .6551 / .4644\\
+        & Czech      & 19,115  & 12+1 & .7025 / .5020 & .6145 / .4031\\
+        & English    & 9,773   & 12+1 & .8239 / .6631 & .7697 / .5977\\
+        & Estonian   & 17,845  & 11+1 & .6612 / .4469 & .5934 / .3509\\
+        & Hungarian  & 20,321  & 12+1 & .6900 / .4972 & .6235 / .4152\\
+        & Romanian   & 15,189  & 14+1 & .6412 / .5004 & .5931 / .4185\\
+        & Slovene    & 17,871  & 12+1 & .6914 / .4951 & .6466 / .4119\\
+        & Serbian    & 18,095  & 12+1 & .6244 / .4473 & .5622 / .3466\\
+        \hline % Conll06 data
+        \multirow{10}{*}{\begin{sideways}\textbf{CoNLL-X Shared Task}\end{sideways}}
+        & Bulgarian  & 32,439  & 54 & .7328 / .5781 & .6615 / .4821\\
+        & Czech      & 130,208 & 12 & .6739 / .4838 & .6082 / .3566\\
+        & Danish     & 18,356  & 25 & .7236 / .5583 & .6210 / .4351\\
+        & Dutch      & 28,393  & 13 & .6957 / .5331 & .6168 / .4000\\
+        & German     & 72,326  & 54 & .7669 / .6308 & .6484 / .5083\\
+        & Portuguese & 28,931  & 22 & .7479 / .5798 & .6734 / .4859\\
+        & Slovene    & 7,128   & 29 & .6513 / .4957 & .5918 / .4164\\
+        & Spanish    & 16,458  & 47 & .7479 / .6086 & .6739 / .5142\\
+        & Swedish    & 20,057  & 41 & .6962 / .5674 & .5779 / .4385\\
+        & Turkish    & 17,563  & 30 & .6239 / .3823 & .5910 / .3309\\ \hline
+    \end{tabular}
+  \label{tab:multiresults}
+\end{table*}

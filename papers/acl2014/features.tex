@@ -1,0 +1,165 @@
+\subsection{Morphological and Orthographic Features}
+\label{sec:feat}
+
+Clark \shortcite{Clark:2003:CDM:1067807.1067817} demonstrates that
+using morphological and orthographic features significantly improves
+part of speech induction with an HMM based model.
+Section~\ref{sec:related} describes a number of other approaches that
+show similar improvements.  We integrate additional features together
+with substitutes by using the model described in Appendix~C.
+
+%% In order to accommodate multiple feature types the CODE model in
+%% Appendix~\ref{sec:codethr} needs to be extended to handle more than
+%% two variables.  Globerson et al. \shortcite{globerson2007euclidean}
+%% suggest the following likelihood function:
+
+%% \begin{eqnarray}
+%% &\ell(\phi,& \psi^{(1)}, \ldots, \psi^{(K)}) = \label{eq:multiscode}
+%%   \sum_i^K w_i \sum_{x,y^{(i)}} \bar{p}(x,y^{(i)}) \log p(x,y^{(i)})
+%% \end{eqnarray}
+
+%% \noindent where $Y^{(1)}, \ldots, Y^{(K)}$ are $K$ different variables
+%% whose empirical joint distributions with $X$,
+%% $\bar{p}(x,y^{(1)})\ldots\bar{p}(x,y^{(K)})$, are known.
+%% Eq.~\ref{eq:multiscode} then represents a set of CODE models
+%% $p(x,y^{(k)})$ where each $Y^{(k)}$ has an embedding $\psi_y^{(k)}$
+%% but all models share the same $\phi_x$ embedding.  The weights $w_k$
+%% reflect the relative importance of each $Y^{(k)}$ and all embeddings
+%% are mapped to unit-sphere.
+
+%% We adopt this likelihood function, set all $w_k=1$, let $X$ represent
+%% a word, $Y^{(1)}$ represent a random substitute, and $Y^{(2)}, \ldots,
+%% Y^{(K)}$ stand for morphological and orthographic features of the word
+%% thus each word is a (K+1)-tuple, $(X, Y^{(1)}, \hdots Y^{(K)})$.  With
+%% this setup, the training procedure needs to change little: instead of
+%% sampling a word -- random-substitute pair, the word --
+%% random-substitute -- features tuple is sampled and input to the
+%% gradient ascent algorithm.  The gradient search algorithm updates the
+%% embeddings according to $p(x,y^{(i)})$ where $i=1\hdots k$ and no
+%% updates are performed between $y^{(i)}$s since they do not have any
+%% co-occurrence statistics and $x$ is the shared variable.
+
+%% Word tuples might have null values due to the unobserved features.
+%% For example, the word ``\textbf{car}'' has no morphological or
+%% orthographic features therefore all the elements of the tuple have
+%% null value except the word type ($X$) and the random-substitute
+%% ($Y^{(1)}$).  We do not perform any pull or push updates on embeddings
+%% during the gradient search if the corresponding $y^{(k)}$ is
+%% null\footnote{$X$ and $Y^{(1)}$ represents the word type and
+%%   random-substitute therefore they are always observed.}.
+
+%% One problem with this setup is that unobserved features misguide the
+%% gradient search algorithm and lead to a suboptimal convergence point.
+%% For example, ``\textbf{car}'' and ``\textbf{red}'' belong to the
+%% ``Noun'' and ``Adjective'' clusters, respectivly, and neither of them
+%% have a morphological feature, thus their morphological features are
+%% represented by a null value, ``X''.  However setting the unobserved
+%% features of words from different clusters to ``X'' leads to a false
+%% similarity between these words.  To solve this problem, 
+
+The orthographic features we used are same with the ones in
+\cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} with small modifications:
+\begin{itemize}
+\item Initial-Capital: this feature is generated for capitalized words
+  with the exception of sentence initial words.
+\item Number: this feature is generated when the instance starts with a
+  digit.
+\item Contains-Hyphen: this feature is generated for lowercase words
+  with an internal hyphen.
+\item Initial-Apostrophe: this feature is generated for instances that
+  start with an apostrophe.
+\end{itemize}
+
+We generated morphological features using the unsupervised algorithm Morfessor
+\cite{creutz05}.  Morfessor was trained on the WSJ section of the Penn Treebank
+using default settings, and a perplexity threshold of 1\footnote{Let's put a
+note on this}.  In our model, a word type consists of two parts: a stem and a
+suffix part.  The suffix part is used as the morphological feature thus each
+word type has only one morphological feature\footnote{We extracted the stem
+  part by concatenating the splits until including the first ``STM'' labeled
+split and the suffix part by concatenating rest of the splits.}.  The program
+induced 5575 suffix types that are present in a total of 19223 word types.
+Table~\ref{tab:sampleswithfeatures} presents the co-occurrence tuples of the
+example sentence after incorporating the orthographic and morphological
+features.
+\begin{table*}[ht]
+\centering
+\footnotesize
+\caption{The words of input sentence \textit{``Pierre Vinken, 61 years old, 
+    will join the board as a nonexecutive director Nov.~29 .''} is represented 
+  with their substitutes and features.  Words on the left 
+  column presents the
+  target word, words on the second column represents the context and
+  instances on the rest of the columns are the features of the
+  correponding target word.  Features without values are unobserved
+  therefore set to null.}
+\begin{tabular}{|lllllll|}
+\hline
+\textbf{Word} & {\bf Context} & {\bf Morphology} &
+\specialcell{{\bf Initial}\\{\bf Capital}} & {\bf Number} &
+\specialcell{{\bf Contains}\\{\bf Hypen}} &
+\specialcell{{\bf Initial}\\{\bf Apostrophe}}
+\\
+\hline
+W:Pierre & \textit{C:Mr.} & & {\it F:IC} &&&\\
+W:Vinken & \textit{C:\unk} & & {\it F:IC} &&&\\
+W:, & \textit{C:,} & & &&&\\
+W:61 & \textit{C:48} & & & {\it F:N}&&\\
+W:years & \textit{C:years} & {\it F:s} &&&&\\
+W:old & \textit{C:old} & & &&&\\
+W:join & \textit{C:head} &&&&&\\
+W:the & \textit{C:its} &&&&&\\
+W:board & \textit{C:company} &&&&&\\
+W:as & \textit{C:as} &&&&&\\
+W:a & \textit{C:a} &&&&&\\
+W:nonexecutive & \textit{C:non-executive} &&&&&\\
+W:director & \textit{C:chairman} & {\it F:or}&&&&\\
+W:Nov. & \textit{C:May} &&{\it F:IC}&&&\\
+W:29 & \textit{C:9} &&&{\it F:N}&&\\
+W. & \textit{C:.} & &&&&\\
+\hline
+\end{tabular}
+\label{tab:sampleswithfeatures}
+\end{table*}
+
+%% These suffixes were input to S-CODE as morphological features whenever
+%% the associated word types were sampled.  In order to incorporate
+%% morphological and orthographic features into
+%% S-CODE we modified its input.  For each word -- random-substitute pair
+%% generated as in the previous section, we added word -- feature pairs
+%% to the input for each morphological and orthographic feature of the
+%% word.  Words on average have 0.25 features associated with them.
+%% This increased the number of pairs input to S-CODE from 14.1
+%% million (12 substitutes per word) to 17.7 million (additional 0.25
+%% features on average for each of the 14.1 million words).
+Using the training settings of the previous section, the addition of
+morphological and orthographic features increased the many-to-one score of the
+random-substitute model to \fwsxymto\ and V-measure to \fwsxyvm.  Both these
+results improve the state-of-the-art instance in part of speech induction
+significantly as seen in Table~\ref{tab:results}.
+
+%% \subsection{Summary}
+%% \label{sec:expsum}
+
+%% We presented methods to determine the best usage of substitute vectors
+%% within the CODE framework and performed sensitivity analysis on the
+%% model parameters to not only show the robustness but also to decide
+%% the best configuration of S-CODE in modeling the co-occurrence of
+%% words with their contexts.  To use the substitute vectors as
+%% co-occurrences we discretized the substitute vectors using two
+%% methods.  The first method (Section~\ref{sec:rpart}) selected 64K
+%% random substitute vectors as the center of 64K partitions and then
+%% assigned rest of the substitute vectors to the closest partition.  As
+%% a result each word represented as a word -- partition-id pair which we
+%% input to S-CODE. The second method (Section~\ref{sec:wordsub}) sampled
+%% random substitutes from the substitute vectors using the fact that the
+%% substitute vectors are probability distributions.  We fed the word --
+%% random-substitute pairs into S-CODE.  Both methods significantly
+%% outperform the syntagmatic bigram model (Section~\ref{sec:bigram}) on
+%% the PTB.  Finally, Section~\ref{sec:feat} showed that adding
+%% morphological and orthographic features improved the accuracy and we
+%% achieved the state-of-the-art \mto\ and \vm\ accuracies on the PTB.
+
+%% In the next section we extend our experiments to include more
+%% languages to demonstrate the robustness of paradigmatic approach on
+%% languages with different characteristics.

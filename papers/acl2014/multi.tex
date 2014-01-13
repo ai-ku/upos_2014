@@ -1,0 +1,96 @@
+\subsection{Multilingual Experiments}
+\label{sec:multilang}
+\noindent Following Christodoulopoulos et
+al. \shortcite{christodoulopoulos-goldwater-steedman:2011:EMNLP}, we extend our
+experiments to 8 languages from MULTEXT-East (Bulgarian, Czech, English,
+Estonian, Hungarian, Romanian, Slovene and Serbian) \cite{citeulike:5820223}
+and 10 languages from the CoNLL-X shared task (Bulgarian, Czech, Danish, Dutch,
+German, Portuguese, Slovene, Spanish, Swedish and Turkish)
+\cite{Buchholz:2006:CST:1596276.1596305}.  
+
+To sample substitutes, we trained language models of Czech, Romanian, German,
+Portuguese, Spanish and Swedish with their corresponding TenTen corpora
+\cite{jakubivcek2013tenten}, and Bulgarian, Estonian, Hungarian, Slovene,
+Serbian, Danish, Dutch with their corresponding Wikipedia dump
+files\footnote{Latest Wikipedia dump files are freely available at
+  \url{http://dumps.wikimedia.org/} and the text in the dump files can be
+  extracted using WP2TXT (\url{http://wp2txt.rubyforge.org/})}.  For the
+  Turkish language modeling we use the web corpus collected from Turkish news
+  and blog sites \cite{sak2008turkish}.  We use ukWaC corpora to train English
+  language models.
+
+We used the default settings in Section~\ref{sec:expset} and incorporated only
+the orthographic features\footnote{All corpora (except German, Spanish and
+Swedish) label the punctuation marks with the same gold-tag therefore we add an
+extra {\em punctuation} feature for those languages.}.  Extracting
+unsupervised morphological features for languages with different
+characteristics would be of great value, but it is beyond the scope of this
+paper.  For each language the number of induced clusters is set to the number
+of tags in the gold-set.  To perform meaningful comparisons with the previous
+work we train and evaluate our models on the training section of
+MULTEXT-East\footnote{Languages of MULTEXT-East corpora do not tag the
+punctuations, thus we add an extra tag for punctuations to the tag-set of these
+languages.} and CONLL-X languages \cite{Lee:2010:STU:1870658.1870741}.
+
+Table~\ref{tab:multiresults} presents the performance of our instance based
+model on 19 corpora in 15 languages together with the corresponding best
+published results from
+$^\diamond$\protect\cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL},
+$^\ddagger$\protect\cite{blunsom-cohn:2011:ACL-HLT2011},
+$^\star$\protect\cite{christodoulopoulos-goldwater-steedman:2011:EMNLP} and
+$^\dagger$\protect\cite{Clark:2003:CDM:1067807.1067817}.  All of the
+state-of-the-art systems in Table~\ref{tab:multiresults} are word-based and
+incorporate morphological features. 
+\input{multibesttable_instance.tex}
+
+Our results are lower than the best systems on 6 out of 8 data-sets
+that use language models trained on the Wikipedia corpora.  TenTen,
+ukWaC and Turkish News corpora are cleaner and tokenized better
+compared to the Wikipedia corpora.  These corpora also have larger
+vocabulary sizes and lower out-of-vocabulary rates.  Thus language
+models trained on these corpora have much lower perplexities and
+generate better substitutes than the Wikipedia based models.  Our
+model has lower \vm\ scores in spite of good \mto\ scores on 15
+corpora which is discussed in Section~\ref{sec:discuss}.
+
+Among the languages for which clean language model corpora were
+available, our model performs comparable to or significantly better
+than the best systems on most languages.  We show significant
+improvements on MULTEXT-East Czech and Romanian, and comparable
+results on CoNLL-X Czech, German, Portuguese and Swedish in terms of the
+\mto\ score.  One reason for comparably low \mto\ on Spanish might be
+the absence of morphological features.  Our model achieves the
+state-of-the-art \mto\ on MULTEXT-East English and scores comparable
+\mto\ with the best model on WSJ.  Our model performs comparable to
+the best system on Turkish.
+
+% TODO: describe the table.
+
+%% Morphological features of each language are extracted by the
+%% method described in Section~\ref{sec:feat}.  The details of the
+%% language model training and feature extraction are detailed in
+%% Appendix~D.
+%% We ignore these results
+%% \input{tokentable.tex}
+%% \subsubsection{Results}
+%% \label{sec:multires}
+%% For each language we report results of three models that cluster: (1)
+%% word embeddings ({\em CLU-W}), (2) word embeddings with orthographic
+%% features ({\em CLU-W+O}) and (3) word embeddings with both orthographic
+%% and morphological features ({\em CLU-W+O+M}).  
+%% As a baseline model we chose the syntagmatic bigram version of S-CODE
+%% described in Section~\ref{sec:pvss} which is a very strong baseline
+%% compared to the ones used in
+%% \cite{christodoulopoulos-goldwater-steedman:2011:EMNLP}.
+%% Table~\ref{tab:multiresults} summarizes the \mto\ and \vm\ scores of
+%% our models together with the syntagmatic bigram baseline and the best
+%% published accuracies on each language corpus.
+%% {\em CLU-W} significantly outperforms the syntagmatic bigram baseline
+%% in both \mto\ and \vm\ scores on 14 languages.  {\em CLU-W+O+M} has
+%% the state-of-the-art \mto\ and \vm\ accuracy on the PTB.  {\em
+%%   CLU-W+O} and {\em CLU-W+O+M} achieve the highest \mto\ scores on all
+%% languages of MULTEXT-East corpora while scoring the highest \vm\
+%% accuracies on English and Romanian.  On the CoNLL-X languages our
+%% models perform better than the best published \mto\ or \vm\ accuracies
+%% on 10 languages.
+

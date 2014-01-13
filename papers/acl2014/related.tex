@@ -1,0 +1,240 @@
+\section{Related Work}
+\label{sec:related}
+%%% This part looks fine
+There are several good reviews of algorithms for unsupervised
+part of speech induction
+\cite{Christodoulopoulos:2010:TDU:1870658.1870714,Gao:2008:CBE:1613715.1613761}
+and models of syntactic category acquisition \cite{ambridge2011child}.
+
+This work is to be distinguished from supervised part of speech
+disambiguation systems, which use labeled training data
+\cite{Toutanova:2003:FPT:1073445.1073478}, unsupervised disambiguation
+systems, which use a dictionary of possible tags for each word
+\cite{yatbaz-yuret:2010:POSTERS}, or prototype driven systems
+which use a small set of prototypes for each class
+\cite{Haghighi:2006:PLS:1220835.1220876}.  The problem of induction is
+important for studying under-resourced languages that lack labeled
+corpora and high quality dictionaries.  It is also essential in
+modeling child language acquisition because every child manages to
+induce syntactic categories without access to labeled sentences,
+labeled prototypes, or dictionary constraints.
+%%%%
+%\paragraph{Distributional vs. Feature Based}
+% \subsection{Distributional vs. Feature Based}
+
+Models of unsupervised part of speech induction fall into two broad groups
+based on the usage of one-tag-per-word assumption.  Word type based models
+enforce the one-tag-per-word solution.  Word instance based models can assign
+instances of a word type to different POS clusters.
+
+\subsection{Distributional models}
+
+Distributional models can be further categorized into three subgroups
+based on the learning algorithm.  The first subgroup represents each
+word type/instance with its context vector and clusters these vectors
+accordingly \cite{Schutze:1995:DPT:976973.976994}.  Work in modeling
+child syntactic category acquisition has generally followed this
+clustering approach
+\cite{redington1998distributional,mintz2003frequent}.  The second
+subgroup consists of probabilistic models based on the Hidden Markov
+Model (HMM) framework \cite{Brown:1992:CNG:176313.176316}.  A third
+group of algorithms constructs a low dimensional representation of the
+data that represents the empirical co-occurrence statistics of word
+types \cite{globerson2007euclidean}, which is covered in more detail
+in Section~\ref{app:codethr}.
+
+\paragraph{Clustering}
+Clustering based methods represent the context using the neighboring
+words, typically a single word on the left and a single word on the
+right called a ``frame'' (e.g., {\em {\bf the} dog {\bf is}; {\bf the}
+  cat {\bf is}}).  They cluster word types rather than word instances 
+based on the frames they occupy thus employing one-tag-per-word
+assumption from the beginning (with the exception of
+\cite{mintz2003frequent,20674613} and some methods in
+\cite{Schutze:1995:DPT:976973.976994}).  They may suffer from the data
+sparsity caused by the infrequent words and the infrequent contexts.
+The solutions suggested either restrict the set of words and set of
+contexts to be clustered to the most frequently observed, or use
+dimensionality reduction.  Redington et
+al. \shortcite{redington1998distributional} define context similarity
+based on the number of common frames bypassing the data sparsity
+problem but achieve lower scores than the best performing systems.
+Mintz \shortcite{mintz2003frequent} only uses the most frequent 45
+frames to cluster instances and achieves 98\% unsupervised accuracy on
+the instances observed in the most frequent 45 frames.  Similar to
+Mintz's work, St Clair et al. \shortcite{20674613} show that systems
+that model the left and right frames of instances seperately perform
+better than the frequent frames both in terms of instances clustering
+accuracy and the instances coverage.  Biemann
+\shortcite{biemann2006unsupervised} contructs a graph based view of
+the most frequent 10,000 words using contexts formed from the most
+frequent 150-200 words and clusters the instances.  Sch\"utze
+\shortcite{Schutze:1995:DPT:976973.976994} and Lamar et
+al. \shortcite{lamar-EtAl:2010:Short} employ SVD to enhance similarity
+between less frequently observed word types and contexts.  Lamar et
+al. \shortcite{Lamar:2010:LCU:1870658.1870736} represent each context
+by the currently assigned left and right tag (which eliminates data
+sparsity) and cluster word types using a soft k-means style iterative
+algorithm.  They report the best clustering result to date of .708
+many-to-one accuracy on the PTB.
+% all except schutze cluster word types
+
+\paragraph{HMMs}
+The prototypical bitag HMM model maximizes the likelihood of the
+corpus $w_1 \ldots w_n$ expressed as $P(w_1|c_1)\prod_{i=2}^n
+P(w_i|c_i) P(c_i|c_{i-1})$ where $w_i$ are the word instances and $c_i$
+are their (hidden) tags.  One problem with such a model is its
+tendency to distribute probabilities equally and the resulting
+inability to model highly skewed word-tag distributions observed in
+hand-labeled data \cite{johnson:2007:EMNLP-CoNLL2007}.  To favor
+sparse word-tag distributions one can enforce a strict
+one-tag-per-word solution (type clustering)
+\cite{Brown:1992:CNG:176313.176316,Clark:2003:CDM:1067807.1067817},
+use sparse priors in a Bayesian setting
+\cite{goldwater-griffiths:2007:ACLMain,johnson:2007:EMNLP-CoNLL2007},
+or use posterior regularization
+\cite{Ganchev:2010:PRS:1859890.1859918}.  Each of these techniques
+provide significant improvements over the standard HMM model: for
+example Gao and Johnson \shortcite{Gao:2008:CBE:1613715.1613761} show
+that sparse priors can gain from 4\% (.62 to .66 on the PTB) in
+cross-validated many-to-one accuracy.  However Christodoulopoulos et
+al. \shortcite{Christodoulopoulos:2010:TDU:1870658.1870714} show that
+the older one-tag-per-word models such as
+\cite{Brown:1992:CNG:176313.176316} outperform the more sophisticated
+sparse prior and posterior regularization methods both in speed and
+accuracy (the Brown model gets .68 many-to-one accuracy on the PTB).
+Given that 93.69\% of the word occurrences in human labeled data are
+tagged with their most frequent part of speech
+\cite{Toutanova:2003:FPT:1073445.1073478}, this is probably not
+surprising; one-tag-per-word is a fairly good first approximation for
+induction.
+
+%% \paragraph{Co-occurrence embedding}
+%% Embedding algorithms maps the original data to a lower dimensional
+%% space that preserves certain similarity structure defined between the
+%% objects in the data.  However in real life problems such as POS
+%% induction the similarity between contexts and word types can not be
+%% trivially constructed given that only the co-occurrence information
+%% exists between word types and their contexts.
+%% S-Code\cite{NIPS2010_1196} which is a spherical extension of
+%% \cite{Globerson:2007:EEC:1314498.1314572} algorithm maps the
+%% word-types and their contexts on to a low dimensional Euclidean sphere
+%% while preserving the co-occurrence statistics between them and then
+%% clusters the low dimensional data with k-means algorithm.  They report
+%% .688 many-to-one accuracy on PTB with 45 tags.
+
+\subsection{Word-feature models}
+One problem with the algorithms in the previous section is the poverty
+of their input features.  Of the syntactic, semantic, and
+morphological information linguists claim underlie syntactic categories,
+context vectors or bitag HMMs only represent limited syntactic information in
+their input.  Clark \shortcite{Clark:2003:CDM:1067807.1067817}, and Blunsom and
+Cohn \shortcite{blunsom-cohn:2011:ACL-HLT2011} cluster types by incorporating
+similar orthographic features and report improvements of 3 and 10\%
+respectively over the baseline Brown model.  Berg-Kirkpatrick et al.
+\shortcite{bergkirkpatrick-klein:2010:ACL} incorporate orthographic features
+into EM algorithm where they replace the multinomial components with miniature
+logistic regressions and cluster instances while improving the Brown model by 7\%.
+
+Christodoulopoulos et
+al. \shortcite{Christodoulopoulos:2010:TDU:1870658.1870714} use
+prototype based features as described in
+\cite{Haghighi:2006:PLS:1220835.1220876} with automatically induced
+prototypes and report an 8\% improvement over the baseline Brown model
+by clustering instances.  Abend et
+al. \shortcite{Abend:2010:IUP:1858681.1858813} train a
+prototype-driven model with morphological features by first clustering
+the high frequent types as the landmarks and then assigning the
+remaining types to these landmark clusters.  Christodoulopoulos et
+al. \shortcite{christodoulopoulos-goldwater-steedman:2011:EMNLP}
+define a type-based Bayesian multinomial mixture model in which each
+word instance is generated from the corresponding word type mixture
+component and word contexts are represented as features.  They achieve
+a .728\ \mto\ score by extending their model with additional
+morphological and alignment features gathered from parallel corpora.
+To our knowledge, nobody has yet tried to incorporate phonological or
+prosodic features in a computational model for syntactic category
+acquisition.
+
+\subsection{Paradigmatic representations}
+
+Yatbaz et al. \shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} explore
+the paradigmatic representation of the word contexts by modeling the
+co-occurrence of words and their substitutes within the S-CODE
+framework.  Their experiments on the PTB types shows that paradigmatic
+representation improves the state-of-the-art \mto\ and V-measure (\vm)
+accuracies of both distributional models and models with additional
+word features.  This paper builds on that preliminary work by
+%% (1) exploring clustering of substitute vectors,
+(1) exploring induction of part-of-speechs at instances level (in addition
+to type level), (2) improving the model for using additional features,
+and (3) experimenting with additional languages.
+
+
+%% This paper defines a new representation that models the features from
+%% different domains as separate variables and relates them to each other
+%% by using their co-occurrence statistics with a shared variable
+%% (i.e. word types).
+
+\subsection{Evaluation}
+%% It is natural to question the merit of evaluating unsupervised results
+%% by comparing them to gold standard tags.  For example
+%% \cite{freudenthal2005resolution} argue that a verb category (such as
+%% {\sc vb} in Penn Treebank) that contains verbs that can and cannot be
+%% used in certain constructions (e.g. the imperative) and verbs that can
+%% be used as both auxiliaries and main verbs (e.g., {\em do, have}) does
+%% not in fact constitute a set of items that could be substituted for
+%% one another in particular sentences.  Such a category fails the
+%% standard linguistic definition of a syntactic category and children do
+%% not seem to make errors of substituting such words in utterances
+%% (e.g. {\em''What do you want?''} vs. {\em *''What put you want?''}).
+%% They suggest evaluating models by incorporating a production component
+%% that allows the model's output to be compared to speech produced by
+%% children exposed to the same input.  \cite{frank2009evaluating},
+%% motivated by the lack of gold standards for many novel languages,
+%% suggest comparing a system's clusters to a set of clusters created
+%% from {\em substitutable frames}.  They create frames using two words
+%% appearing in the corpus with exactly one word between and calculate
+%% precision, recall, and F-score of the system's clustering.
+%% Statistical parsers or factored machine learning systems could also be
+%% sources of extrinsic evaluation for induced syntactic categories.  We
+%% hope such extrinsic evaluation will be more widespread in the future
+%% but nevertheless use many-to-one (\mto) and V-measure (\vm) metric on
+%% the 45-tag Penn Treebank gold standard to evaluate the current work.
+
+We report many-to-one and V-measure scores for our experiments as
+suggested in \cite{Christodoulopoulos:2010:TDU:1870658.1870714}.  The
+many-to-one (\mto) evaluation maps each cluster to its most frequent
+gold tag and reports the percentage of correctly tagged instances.
+The \mto\ score naturally gets higher with increasing number of
+clusters but it is an intuitive metric when comparing results with the
+same number of clusters.  The V-measure (\vm) \cite{rosenberg2007v} is
+an information theoretic metric that reports the harmonic mean of
+homogeneity (each cluster should contain only instances of a single
+class) and completeness (all instances of a class should be members of
+the same cluster).  In Section~\ref{sec:discuss} we argue that
+homogeneity is perhaps more important in part of speech induction and
+suggest \mto\ with a fixed number of clusters as a more intuitive
+metric.
+
+%% \paragraph{Many-to-one (MTO)} metric measures the cluster purity 
+%% therefore each cluster is mapped to the most frequent gold tag of the
+%% words observed in that cluster.  \mto metric is the most intuitive
+%% measure, however it has a bias towards to the increasing number of
+%% clusters thus it should be used when the number of clusters is fixed
+%% \cite{christodoulopoulos-goldwater-steedman:2011:EMNLP}.
+%% \paragraph{V-measure (VM)} is an entropy based metric that calculates
+%% weighted average of cluster homogeneity and completeness in a similar
+%% fashion with F-measure recall and precision, respectively.  The
+%% cluster homogeneity is an analogy of the cluster purity in \mto.
+%% Although \vm is more robust to variable number of clusters, it is less
+%% intuitive than \mto
+%% \cite{christodoulopoulos-goldwater-steedman:2011:EMNLP}.  Moreover it
+%% punishes the clustering when words with same gold tag distributed over
+%% different clusters which contradicts with the idea of POS induction
+%% since the aim is to cluster words according to the underlying natural
+%% grouping.
+
+%%% DY: where is the original paper that introduced V-measure?
+%%% DY: are you sure Chris2011 is the right citation, shouldn't it be Chris2010?
+
