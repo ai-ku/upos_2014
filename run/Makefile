@@ -1,16 +1,18 @@
-## ### INSTALLATION:
+### INSTALLATION:
+
 bin:
+	echo "Installing"
 	cd ../../bin; make
 
-## ### GENERAL setup:
+### GENERAL setup:
 SEED=1 # Random seed
 NCPU=10 # Number of threads/processes to use for parallel computations
 SRILM_PATH=/opt/srilm/bin/i686-m64
 export PATH := ../../bin:.:${SRILM_PATH}:${PATH} # Binaries in the bin directory
 LM_DISCOUNT=-kndiscount
-## ### INPUT files:
-## # WSJ training data from CSR-3.  wc=5187874 126170376 690948662
-## NTEST=118424 # Number of test instances of English
+### INPUT files:
+# WSJ training data from CSR-3.  wc=5187874 126170376 690948662
+NTEST=118424 # Number of test instances of English
 
 ### SMALLER DATA for distance, dimensionality reduction and clustering sections
 #Top MINI_SIZE words of the data are extracted
@@ -873,5 +875,5 @@ clean:
 	-rm *.vocab.gz *.words.gz *.pos.gz
 	-rm *.pairs.gz *.scode.gz *.kmeans.gz
 	-rm plot-?.dat
-	cd ../bin; make clean
-	cd ../src; make clean
+	cd ../../bin; make clean
+	cd ../../src; make clean

@@ -73,4 +73,4 @@ check:
 	true
 
 clean:
-	-rm *.m *.pl *.py *.gp *.sh fastsubs subs dists scode wkmeans wordsub *.mexa64 *~
+	-rm *.m *.pl *.py *.gp *.sh fastsubs subs dists scode wkmeans wordsub *.mexa64 *sed *~
