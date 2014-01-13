@@ -505,7 +505,7 @@ idis+o.%.out: %.tok.gz %.pos.gz %.sub.gz %.words.gz
 	dis+f-args.pl ${LANG_CL} ${LANGUAGE} ${DISO_FEAT} | xargs -n ${DISO_NARGS} -P${NCPU} idis+f-run.pl > $@
 	rm ${DISO_FEAT}
 
-dis+o.%.out: %.tok.gz %.pos.gz %.sub.gz 
+dis+o.%.out: %.tok.gz %.pos.gz %.sub.gz %.words.gz
 	feature-table.pl ${DIS_FEAT_OPT} -w $< | gzip > ${DISO_FEAT}
 	dis+f-args.pl ${LANG_CL} ${LANGUAGE} ${DISO_FEAT} | xargs -n ${DISO_NARGS} -P${NCPU} dis+f-run.pl > $@
 	rm ${DISO_FEAT}
