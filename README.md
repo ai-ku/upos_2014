@@ -58,11 +58,15 @@ run/Makefile for details and more options.
 cd upos/run/[LanguageTag]; make bin; make # compiles and puts symlinks in bin directory
 
 make [LanguageTag].vocab.gz	# time=??? - prepares the LM vocabulary
+
 make [LanguageTag].lm.gz		# time=??? - creates a 4-gram LM
+
 make [LanguageTag].sub.gz		# time=??? - finds most likely substitutes
 
 make idis.[LanguageTag].out     # runs the word and instance experiments without features
+
 make idis+o.[LanguageTag].out   # runs the experiments with orhtographic features
+
 make idis+om.[LanguageTag].out  # runs the experiments with orhtographic and morphologic features
 
 Other Makefile targets are for running bulk experiments to generate
