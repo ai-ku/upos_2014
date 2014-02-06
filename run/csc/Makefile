@@ -2,7 +2,7 @@
 #Tag of language
 LANGUAGE=csc
 LANGUAGE_REPO_NAME=upos-${LANGUAGE}-data.git
-LANGUAGE_REPO=git@github.com:ai-ku/${LANGUAGE_REPO_NAME}
+LANGUAGE_REPO=http://github.com/ai-ku/${LANGUAGE_REPO_NAME}
 LANGUAGE_REPO_TAG=
 
 #Vocabulary threshold

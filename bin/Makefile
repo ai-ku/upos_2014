@@ -4,16 +4,16 @@ all: eval.pl fastsubs dists scode wkmeans wordsub readsparse.mexa64 runsc.m runp
 ## If the latest version is required then do not set the corresponding
 ## tag variable.
 ## SCODE
-SCODE_GIT_REPO=git://github.com/ai-ku/scode.git
+SCODE_GIT_REPO=https://github.com/ai-ku/scode.git
 SCODE_GIT_TAG=acl2014
 ## DIST
-DIST_GIT_REPO=git://github.com/ai-ku/dist.git
+DIST_GIT_REPO=https://github.com/ai-ku/dist.git
 DIST_GIT_TAG=acl2014
 ## WKMEANS
-WKMEANS_GIT_REPO=git://github.com/ai-ku/wkmeans.git
+WKMEANS_GIT_REPO=https://github.com/ai-ku/wkmeans.git
 WKMEANS_GIT_TAG=acl2014
 ## FASTSUBS
-FASTSUBS_GIT_REPO=git://github.com/ai-ku/fastsubs.git
+FASTSUBS_GIT_REPO=https://github.com/ai-ku/fastsubs.git
 FASTSUBS_GIT_TAG=acl2014
 ###
 eval.pl: check
