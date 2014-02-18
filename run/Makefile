@@ -140,7 +140,7 @@ KNN_OPTIONS=-k ${KNN} -d ${KNN_METRIC} -p ${NCPU} -v
 FS_NSUB=100 # go until you have this many substitutes
 FS_PSUB=1.0 # or this much cumulative probability
 FS_SEED=1   # seed of the fastsubs
-FS_OPTIONS=-n ${FS_NSUB} -p ${FS_PSUB} -s ${FS_SEED}
+FS_OPTIONS=-n ${FS_NSUB} -p ${FS_PSUB} 
 
 %.sub.gz: %.tok.gz %.lm.gz  %.ppl.gz #%.unk ## FS_NSUB=100 FS_PSUB=1: time=4h47m, wc=1222974 245817774 2350067125	
 	zcat $< | fastsubs ${FS_OPTIONS} $*.lm.gz | gzip > $@
