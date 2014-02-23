@@ -27,7 +27,7 @@ fastsubs: check
 	test -e wordsub || ln -s ../src/fastsubs/wordsub .
 
 dists: check
-	test -e ../src/dists || (cd ../src/ && git clone ${DIST_GIT_REPO} ) 
+	test -e ../src/dist || (cd ../src/ && git clone ${DIST_GIT_REPO} ) 
 	cd ../src/dist && git checkout ${DIST_GIT_TAG} && make
 	test -e $@ || ln -s ../src/dist/dists .
 
