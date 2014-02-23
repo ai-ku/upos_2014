@@ -5,7 +5,7 @@ all:
 	cd wkmeans; make
 
 clean:
-	cd dist; make clean
-	cd fastsubs; make clean
-	cd scode; make clean
-	cd wkmeans; make clean
+	-rm -rf dist
+	-rm -rf fastsubs
+	-rm -rf scode
+	-rm -rf wkmeans
