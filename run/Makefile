@@ -871,9 +871,10 @@ plotall: displot-s.${LANGUAGE}.dat displot-v.${LANGUAGE}.dat dis+oplot-s.${LANGU
            rprun.out wsrun.out kmrun.out bgrun.out
 
 clean:
-	-rm -i *.lm.gz *.sub.gz *.knn.gz rprun.out wsrun.out kmrun.out bgrun.out
+	-rm -i *.lm.gz *.ppl.gz *.sub.gz *.knn.gz rprun.out wsrun.out kmrun.out bgrun.out
 	-rm *.vocab.gz *.words.gz *.pos.gz
 	-rm *.pairs.gz *.scode.gz *.kmeans.gz
+	-rm *.out
 	-rm plot-?.dat
 	cd ../../bin; make clean
 	cd ../../src; make clean
