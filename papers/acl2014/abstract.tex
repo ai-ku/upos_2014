@@ -5,21 +5,40 @@
 %% 2- how we do:
 %% 3- our performance
 
-  We introduce an unsupervised, {\em instance-based} part-of-speech
-  induction system that gives state of the art results in 15
-  languages.  The system successfully handles highly ambiguous words
-  which pose a challenge to {\em word-based} induction systems that
-  constrain or strongly bias each word to have a single part-of-speech
-  category.  We use probable substitutes of each word instance as
-  contextual features.  Words and their contextual, orthographic and
-  morphological features are embedded in a high-dimensional Euclidean
-  space where distances are used to model their joint distribution.
-  To represent a word instance we concatenate its word embedding with
-  the average of its contextual feature embeddings.  Our instance
-  based system scores 79.5\% many-to-one accuracy on the Penn Treebank
-  and achieves results that are significantly better than or
-  comparable to the best published systems on 12 out of 19 corpora in
-  15 languages.
+  We develop an instance (token) based extension of the state of the
+  art word (type) based part-of-speech induction system introduced in
+  \cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL}.  Each word instance is
+  represented by a feature vector that combines information from the
+  target word and probable substitutes sampled from an n-gram model
+  representing its context.  Modeling ambiguity using an instance
+  based model does not lead to significant gains in overall accuracy
+  in part-of-speech tagging because most words in running text are
+  used in their most frequent class (e.g. 93.69\% in the Penn
+  Treebank).  However it is important to model ambiguity because most
+  frequent words are ambiguous and not modeling them correctly may
+  negatively affect upstream tasks.  Our main contribution is to show
+  that an instance based model can achieve significantly higher
+  accuracy on ambiguous words at the cost of a slight degradation on
+  unambiguous ones, maintaining a comparable overall accuracy.  On the
+  Penn Treebank, the overall many-to-one accuracy of the system is
+  within 1\% of the state-of-the-art (80\%), while on highly ambiguous
+  words it is up to 70\% better.  On multilingual experiments our
+  results are significantly better than or comparable to the best
+  published word or instance based systems on 12 out of 19 corpora in
+  15 languages.  The vector representations for words used in our
+  system are available for download for further experiments.
+
+  %% The instance
+  %% based algorithm combines information from the target word and its
+  %% context to successfully handle ambiguous words which pose a
+  %% challenge to word (type) based induction systems that constrain or
+  %% strongly bias each word to have a single part-of-speech category.
+  %% To construct a representation for each word instance, the word type
+  %% and its contextual, orthographic and morphological features are
+  %% embedded in a high-dimensional Euclidean space where distances are
+  %% used to model their joint distribution.  The embedding of the word
+  %% type and the average of the contextual feature embeddings are
+  %% concatenated to construct an instance vector.
 
 %%We investigate paradigmatic representations of word context in the
 %%domain of unsupervised part of speech induction.  Paradigmatic representations

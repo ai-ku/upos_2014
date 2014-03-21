@@ -1,21 +1,17 @@
 \subsection{Word vs. Instance-Based Induction}
 \label{sec:typevsinstance}
 
-\begin{figure}[h] \centering
-  \includegraphics[width=\columnwidth]{ksmooth-f.pdf} 
-  \caption{Regression lines for the word and instance based models on the \mto\
-    accuracy vs {\em GP} plot for the PTB.} 
-  \label{fig:perplexity}
-\end{figure}
-
-In this section we compare the output of a word-based and an
-instance-based POS induction system.  We use the state of the art
-word-based induction system described in
-\cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} which achieves
-\ftmto\ \mto\ and \ftvm\ \vm\ on the PTB.
-
-We propose the gold-tag perplexity of a word as a measure of its
-degree of ambiguity defined as follows:
+Table~\ref{tab:results} shows that the overall many-to-one accuracy of
+our instance based induction system is comparable to
+\cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL}\footnote{The difference is
+  not statistically significant at $p=0.05$.} and significantly higher
+than the other published results.  However Figure~\ref{fig:perplexity}
+suggests that this summary hides the large difference in the answers
+given by the different systems.  In this section we compare the
+performance of our instance-based model to the word-based model of
+\cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} on word types at different
+levels of ambiguity.  We propose the gold-tag perplexity of a word as
+a measure of its degree of ambiguity defined as follows:
 \begin{equation*} \label{eq:tag-perp}
 GP(w) = 2^{H(p_w)} = 2^{-\sum_{t} p_w(t)log_2 p_w(t)}
 \end{equation*}
@@ -25,22 +21,21 @@ distribution.  A $GP$ of 1 for a word $w$ indicates that $w$ is always
 associated with the same POS tag.  A word with $N$ equally probable
 tags would have a $GP$ of $N$.
 
-Figure~\ref{fig:perplexity} plots the gold-tag perplexity versus the
-smoothed \mto\ accuracy for the word-based and the instance-based POS
-induction system.  To compose the plot, we find the best mapping from
-the induced clusters to the gold-standard tags, then we compute the
-\mto\ accuracy for each word using this mapping and plot the \mto\ as
-a function of the word's $GP$.  We use the Nadaraya-Watson kernel
-regression estimate \cite{nadaraya1964estimating,watson1964smooth}
-with normal kernel of bandwidth 1.0 to obtain smooth regression lines.
-
-Figure~\ref{fig:perplexity} shows that the performance of the
-instance-based induction model does not degrade as much as the
-word-based model as the ambiguity of the words increase.  However,
-only 14.94\% of the instances in the PTB consists of words with GP
-greater than 1.5 and 45.71\% consists of words with GP exactly 1.
-Thus, the overall accuracy numbers do not adequately reflect the
-improvement on highly ambiguous words.
+Figure~\ref{fig:perplexity} in the introduction plots the gold-tag
+perplexity versus the smoothed \mto\ accuracy for the word-based and
+the instance-based POS induction systems.  To compose the plot, we
+found the best mapping from the induced clusters to the gold-standard
+tags, then we computed the \mto\ accuracy for each word using this
+mapping and plotted the \mto\ as a function of the word's $GP$.  We
+used the Nadaraya-Watson kernel regression estimate
+\cite{nadaraya1964estimating,watson1964smooth} with normal kernel of
+bandwidth 1.0 to obtain smooth regression lines.  The figure shows
+that the performance of the instance-based induction model does not
+degrade as much as the word-based model as the ambiguity of the words
+increase.  However, only 14.94\% of the instances in the PTB consists
+of words with GP greater than 1.5 and 45.71\% consists of words with
+GP exactly 1.  Thus, the overall accuracy numbers do not adequately
+reflect the improvement on highly ambiguous words.
 
 %% In the next section we apply the instance based model on 19 corpora in 15
 %% different languages. 

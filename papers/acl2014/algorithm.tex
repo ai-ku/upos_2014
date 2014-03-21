@@ -8,7 +8,8 @@ POS-induction algorithm:
     corpus using an n-gram language model.
   \item Construct $r$ tuples for each instance where each tuple
     consists of a sampled substitute, the target word, and the
-    morphological and orthographical features of the target word.
+    morphological and orthographical features of the target word (see
+    Table~\ref{tab:sampleswithfeatures}).
   \item Construct Euclidean embeddings of each word and each feature based on
     all tuples following Gleberson et al.\shortcite{globerson2007euclidean}
     and Maron et al.\shortcite{maron2010sphere}.
@@ -17,20 +18,20 @@ POS-induction algorithm:
     its substitute embeddings.
   \item Use $k$-means clustering to cluster the instance vectors where
     $k$ is equal to the number of gold tags.
-  \item Construct a mapping from clusters to tags for evaluation using
-    the most frequent tag found in each cluster.
+  %% \item Construct a mapping from clusters to tags for evaluation using
+  %%   the most frequent tag found in each cluster.
 \end{enumerate}
 
 Steps 1 and 2 construct a tuple representation for each instance.
 Table~\ref{tab:sampleswithfeatures} gives some example tuples for Sentence (1)
 from the previous section.  In this example $r=3$, so three substitutes are
 sampled for each instance as contextual features.  The sampling is with
-replacement from the substitute word distribution of a given context using the
+replacement from the substitute word distribution of a context given by the
 n-gram language model, so some substitute words may be repeated.  The target
 word and its other features are identical for each of the $r$ tuples
 representing a single instance.
 
-\begin{table}[h]
+\begin{table}[t]
   \centering
   \begin{tabular}{|lllll|}
     \hline
@@ -50,7 +51,7 @@ representing a single instance.
   \caption{The tuples constructed for the instances of ``Vinken'',
     ``61'' and ``years'' from Sentence (1).  The elements of each tuple
     are the target word, sampled substitute, suffix, capitalization, and
-  the presence of numeric characters.}
+    number features.}
   \label{tab:sampleswithfeatures}
 \end{table}
 
@@ -101,15 +102,49 @@ representing a single instance.
 %% \label{tab:sampleswithfeatures}
 %% \end{table*}
 
-In step 3, we construct Euclidean embeddings for each unique word and feature
-value using the multi-variable version of the CODE algorithm described in
-\cite{globerson2007euclidean}, Section 6.2.  The CODE algorithm models the
-pairwise joint distributions between target words and their contextual,
-morphological, and orthographic features by embedding the frequently
-co-occuring pairs closer in Euclidean space.  The spherical optimization
-(S-CODE) described in \cite{maron2010sphere} is used for efficiency.
-Appendix~A details the model likelihood and the training procedure in our
-setup. 
+In step 3, we construct Euclidean embeddings for each unique word and
+feature value using the multi-variable version of the CODE algorithm
+described in \cite{globerson2007euclidean}.  Given two categorical
+variables $X$ and $Y$, the CODE algorithm constructs Euclidean
+embeddings (vectors) for each of their distinct values in the same
+space.  The distance between an $x$ vector and a $y$ vector is related
+to their joint distribution $p(x, y)$ as
+follows\footnote{\cite{globerson2007euclidean} describes several ways
+  to relate distances to probabilities, the model used here is the
+  marginal-marginal (MM) model.}
+
+\[ p(x,y) = \frac{1}{Z} \bar{p}(x) \bar{p}(y) e^{-d^2_{x,y}} \]
+
+\noindent where $\bar{p}$ represents empirical probabilities
+(frequencies from the training data), $d_{x,y}$ is the distance
+between the embeddings of $x$ and $y$ and $Z=\sum_{x,y} \bar{p}(x)
+\bar{p}(y) e^{-d^2_{x,y}}$ is a normalization constant.  Starting with
+random vectors for each distinct value of $x$ and $y$, we use
+stochastic gradient ascent to move the embedding vectors around to
+maximize the likelihood given by this model.  Calculating the
+normalization constant $Z$ is the most expensive part of this
+procedure.  We solve this problem following \cite{maron2010sphere} who
+suggest that a constant $Z$ approximation can be used if the
+embedding vectors are kept on the unit sphere.
+
+As Table~\ref{tab:sampleswithfeatures} shows, considering the target
+word and its contextual, morphological and orthographic features gives
+us more than two variables.  Yatbaz et
+al. \shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} adopt the two
+variable CODE algorithm to this multi-variable case in an ad-hoc
+manner by considering the target word as $x$ and all other features as
+distinct $y$ values.  We implement the multi-variable extension of
+CODE suggested by \cite{globerson2007euclidean} (Section 6.2) which
+optimizes the following likelihood function:
+
+\[ \ell(\phi, \psi^{(1)}, \ldots, \psi^{(K)}) = 
+    \sum_{i=1}^K \sum_{w,f^{(i)}} \bar{p}(w,f^{(i)}) \log p(w,f^{(i)}) \]
+
+\noindent where $\phi$ are the embeddings of target words, $\psi^{(i)}$ are the
+embeddings for the values of the $i$'th feature $f^{(i)}$.  The set of
+$K$ bivariate CODE models
+$p(w,f^{(i)})$ share the same target word embeddings $\phi(w)$ but
+build their own feature embeddings $\psi^{(i)}(f^{(i)})$.
 
 %% To handle co-occurrence tuples we use the modified version of S-CODE that can
 %% model more than two variables (see Appendix~\ref{app:multiscode}).  We feed
@@ -157,11 +192,13 @@ setup.
 Step 4 constructs a vector representation for each word instance with the
 concatenation of its word type embedding and the average of its $r$ substitute
 embeddings.  If the original embeddings are in $d$ dimensional space, this
-results in a $2d$ dimensional vector representing an instance.  Step 5 clusters
-these $2d$ dimensional instance vectors using a modified k-means algorithm with
-smart initialization \cite{arthur2007k} and assigns each instance to one of $k$
-clusters.  Step 6 constructs a mapping between the clusters and the gold tags
-for evaluation.  
+results in a $2d$ dimensional vector representing an instance.
+
+Step 5 clusters these $2d$ dimensional instance vectors using a
+modified k-means algorithm with smart initialization
+\cite{arthur2007k} and assigns each instance to one of $k$ clusters.
+%% Step 6 constructs a mapping between the clusters and the gold tags
+%% for evaluation.  
 
 %% Yatbaz et al.\shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} model co-occurrence
 %% pairs using the S-CODE with two variables and cluster the embeddings of word
