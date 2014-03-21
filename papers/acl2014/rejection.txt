@@ -1,0 +1,684 @@
+                                                                                                                                                                                                                                                               
+Delivered-To: denizyuret@gmail.com
+Received: by 10.140.43.38 with SMTP id d35csp115454qga;
+        Tue, 18 Feb 2014 22:32:40 -0800 (PST)
+X-Received: by 10.194.22.232 with SMTP id h8mr1080551wjf.53.1392791559660;
+        Tue, 18 Feb 2014 22:32:39 -0800 (PST)
+Return-Path: <maliyatbaz@gmail.com>
+Received: from mail-we0-x22c.google.com (mail-we0-x22c.google.com [2a00:1450:400c:c03::22c])
+        by mx.google.com with ESMTPS id f1si14367932wik.54.2014.02.18.22.32.39
+        for <denizyuret@gmail.com>
+        (version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+        Tue, 18 Feb 2014 22:32:39 -0800 (PST)
+Received-SPF: pass (google.com: domain of maliyatbaz@gmail.com designates 2a00:1450:400c:c03::22c as permitted sender) client-ip=2a00:1450:400c:c03::22c;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: domain of maliyatbaz@gmail.com designates 2a00:1450:400c:c03::22c as permitted sender) smtp.mail=maliyatbaz@gmail.com;
+       dkim=pass header.i=@ku.edu.tr;
+       dmarc=pass (p=NONE dis=NONE) header.from=ku.edu.tr
+Received: by mail-we0-x22c.google.com with SMTP id u56so2514102wes.17
+        for <denizyuret@gmail.com>; Tue, 18 Feb 2014 22:32:39 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20130820;
+        h=x-gm-message-state:dkim-signature:dkim-signature:mime-version
+         :reply-to:sender:in-reply-to:references:from:date:message-id:subject
+         :to:content-type:delivered-to;
+        bh=CdoBoF57v495lwCdZeD02ObBBJisKb5MyKfwV+PEabo=;
+        b=DT9MnJvlH7xUB5NTrDsKo1DxR4nVgst5KKbGrlTeVhULzP+QD5bsPADNssn8k2sm+E
+         DEh58kNKq4kboCnjtiGr/FDuj9KhNdE0BdnWDKklnI7xhsCs20VcD7qfTGnOv+NiV8W5
+         AObfqenhDEvsmSDyFEQ8bqnSNLHodguAh9El9byK4Nh2rFQtFtidvgxZEyq+sqdqtbF4
+         xJrBH5+x+GQQnk+epuc4wsrT8sbU8tcqcJT9z2yz1eVROog6nCzqQqlgpkeU7B8QLYV1
+         8EH0SP/8e99gJSJrVgUE99ZYin9MCIwYG/l8pV49dOYby9JgWYCqy9MfQkTLFWZCGJeY
+         BuHA==
+X-Received: by 10.180.187.237 with SMTP id fv13mr21287172wic.26.1392791559000;
+        Tue, 18 Feb 2014 22:32:39 -0800 (PST)
+X-Gm-Message-State: ALoCoQnOaGkWt4pojijkrUj9uwC6bUeJzTunlkYEXj3+kY2cgwjoX34VorqxTBLas27cx/NuM+7Cipwx3QWl5VPdLoXorAk3sOdxjBFHi+DZfig0+ZLRY20IJbWoRbOl4nyMQir3SxVN
+X-Received: by 10.180.187.237 with SMTP id fv13mr21287114wic.26.1392791557718;
+        Tue, 18 Feb 2014 22:32:37 -0800 (PST)
+Return-Path: <maliyatbaz@gmail.com>
+Received: from mail-wi0-x235.google.com (mail-wi0-x235.google.com [2a00:1450:400c:c05::235])
+        by mx.google.com with ESMTPS id eo20si14374751wid.38.2014.02.18.22.32.37
+        for <dyuret@ku.edu.tr>
+        (version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);
+        Tue, 18 Feb 2014 22:32:37 -0800 (PST)
+Received-SPF: pass (google.com: domain of maliyatbaz@gmail.com designates 2a00:1450:400c:c05::235 as permitted sender) client-ip=2a00:1450:400c:c05::235;
+Received: by mail-wi0-f181.google.com with SMTP id hi5so210754wib.2
+        for <dyuret@ku.edu.tr>; Tue, 18 Feb 2014 22:32:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:reply-to:sender:in-reply-to:references:from:date
+         :message-id:subject:to:content-type;
+        bh=CdoBoF57v495lwCdZeD02ObBBJisKb5MyKfwV+PEabo=;
+        b=bvJnioglfCisonQl4auDVKY8KuvA/03G7miNMUSlSgCOI85HGhwJP315tuLsYYTZZ7
+         ua3E/JW43uzuXx+KJwANF7SXp3FpvAQKiBRKhkOIne18a9V1aNG5o9m5ayZi8YXnaJOe
+         xMxYVzaa0q9S+ZXr6W++3cZoW/eC49BMvZrHxM1LsXLNu2SQ5m8P1Q8gN9EFpaKaloxp
+         zDQdcyKxiY7+BD7NJcLuRxbexGeyLzJuPEj2AGbxdWoaF20JpPX84ML3NfPiBRTg3NXh
+         g3UBnr4zQ8yjZi3fTk5b3rwcTs51yVCDZ+r9STvYNX/urtkx/LXHwK+W4K/u2QbE6tea
+         Nsmg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ku.edu.tr; s=google;
+        h=mime-version:reply-to:sender:in-reply-to:references:from:date
+         :message-id:subject:to:content-type;
+        bh=CdoBoF57v495lwCdZeD02ObBBJisKb5MyKfwV+PEabo=;
+        b=fHIHJaK51Eu9jHFjA+dXq3BgKFQLcqzx0UKxyL0zdMEAP901LFglyTOIfqomR0av3J
+         9OL02XmUFyZJV+/xVcTPs5mWhmeMZfwztHC36wobsnuO1oANI5w8w/SBT0oJZT+m8R9S
+         B6kh+Nn/SpnCvRqROTvlgHLTdZfdTQqFMoYpI=
+X-Received: by 10.194.170.167 with SMTP id an7mr22309040wjc.39.1392791557170;
+ Tue, 18 Feb 2014 22:32:37 -0800 (PST)
+MIME-Version: 1.0
+Reply-To: maliyatbaz@gmail.com
+Sender: maliyatbaz@gmail.com
+Received: by 10.180.103.226 with HTTP; Tue, 18 Feb 2014 22:31:57 -0800 (PST)
+In-Reply-To: <201402190620.s1J6K9CO013875@sun.softconf.com>
+References: <201402190620.s1J6K9CO013875@sun.softconf.com>
+From: Mehmet Ali Yatbaz <myatbaz@ku.edu.tr>
+Date: Wed, 19 Feb 2014 08:31:57 +0200
+X-Google-Sender-Auth: pmPjYBuKffm6nS0t7JR8NfqBfKE
+Message-ID: <CAPY5T=fNraEZzyPdUySjxzWfE3VJuz+dZ6ENzbuHq5JxmC0iJA@mail.gmail.com>
+Subject: Fwd: ACL 2014 Author Response Period
+To: Deniz Yuret <dyuret@ku.edu.tr>
+Content-Type: multipart/alternative; boundary=089e013c621c02eb8504f2bc8ed0
+Delivered-To: dyuret@ku.edu.tr
+
+--089e013c621c02eb8504f2bc8ed0
+Content-Type: text/plain; charset=ISO-8859-1
+
+---------- Forwarded message ----------
+From: <acl2014pcchair@outlook.com>
+Date: Wed, Feb 19, 2014 at 8:20 AM
+Subject: ACL 2014 Author Response Period
+To: maliyatbaz@gmail.com
+Cc: acl2014pcchair@outlook.com
+
+
+Dear Mehmet Ali Yatbaz:
+
+This letter regards the following submission to ACL 2014:
+
+    Title: Unsupervised Instance-Based Part of Speech Induction
+           Using Probable Substitutes
+   Number: 233
+ Passcode: 233X-B4F3B4B3A9
+
+Draft reviews of this submission are now available. In a small number of
+cases, you will see that one reviewer has not yet uploaded a review -- we
+are hastily chasing such reviewers and additional reviews should be in very
+soon.
+
+For a short time, you will have the opportunity to respond
+to the reviews. You can enter your author response by 10 am (morning) on
+Feb 22, 2014. You may forward this email to your co-authors as they will
+not have received this information.
+
+Your response should be limited to items such
+as correcting factual errors in the reviews, answering questions
+raised in the reviewer comments, and so on.
+
+You are requested NOT to use the response form to debate the
+reviewers' subjective opinions regarding the merit of your work.
+Nor should you try to "correct" your paper in any way - either
+in terms of its basic technical arguments, or in the presentation
+of those arguments.  Above all, the response facility should not
+be used to report on new results, obtained since the submission
+deadline closed.
+
+Of course, you are free to write whatever you wish to write.
+That said, please note that this process is intended to help
+produce more accurate REVIEWS for your paper.  It is not
+intended to strengthen the arguments in your paper; moreover,
+your remarks will not lead to changing the reviewers' fundamental
+perceptions of your work, as reflected in their reviews.
+
+If the paper is accepted, you will still have ample opportunity
+to make revisions, i.e., before sending in your camera-ready copy.
+
+Your response should be entered by:
+
+        10 am (morning) on Feb 22, 2014.
+
+
+To make your response, go to the following URL:
+
+     https://www.softconf.com/acl2014/papers/
+
+You will be prompted to login to your START account.  If
+you do not see your submission, you can access it with the
+following passcode:
+
+     233X-B4F3B4B3A9
+
+
+============================================================================
+ACL 2014 Reviews for Submission #233
+============================================================================
+
+Title: Unsupervised Instance-Based Part of Speech Induction Using Probable
+Substitutes
+
+Authors: Mehmet Ali Yatbaz, Enis Rifat Sert and Deniz Yuret
+============================================================================
+                            REVIEWER #1
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         APPROPRIATENESS: 5
+                                 CLARITY: 4
+                             ORIGINALITY: 3
+                 SOUNDNESS / CORRECTNESS: 4
+                           REPLICABILITY: 4
+                   MEANINGFUL COMPARISON: 4
+                               SUBSTANCE: 4
+              IMPACT OF IDEAS OR RESULTS: 3
+         IMPACT OF ACCOMPANYING SOFTWARE: 1
+          IMPACT OF ACCOMPANYING DATASET: 1
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper presents a token-level POS tagger. The tagger uses probable
+substitutes as contextual features, and obtains strong results on various
+settings. The paper is generally well written and presents nice results.
+
+This paper is a token-level extension of the (Yatbaz et al., 2012)
+type-level
+tagger. Although the shift from type- to token-level is an important one, I
+do
+not see the real contribution this paper has over (Yatbaz et al., 2012). The
+paper basically uses the same technology (probable substitutes, S-CODE
+algorithm), and obtains similar (if not inferior) results on the only
+compared
+dataset.
+
+Regarding the other set of contributions presented by the authors:
+-- The S-Code part is only referred to in the conclusion and the appendix
+(the
+previous mention of this algorithm was short and did not imply anything
+interesting). More explanations are required in order to understand the
+novelty
+here. Moreover, as the authors have 1.5-2 pages left, this should have been
+part of the main paper.
+-- The results presented in the paper are nice, although I am not convinced
+(as
+no evidence is provided otherwise) that the proposed system performs any
+better
+than the 2012 paper.
+-- With respect to the code release, the authors should have submitted it
+along
+with the paper. Currently, it cannot be addressed in this review.
+
+Other comments:
+
+1. The term "probable substitutes" should be more carefully explained.
+2. I would have liked to see how the model behaves with different values of
+K
+(for the K-means algorithm).
+
+Minor comment:
+1. Table 1 is hard to interpret (bold numbers should indicate the highest
+results only)
+
+============================================================================
+                            REVIEWER #2
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         APPROPRIATENESS: 5
+                                 CLARITY: 3
+                             ORIGINALITY: 3
+                 SOUNDNESS / CORRECTNESS: 4
+                           REPLICABILITY: 4
+                   MEANINGFUL COMPARISON: 4
+                               SUBSTANCE: 3
+              IMPACT OF IDEAS OR RESULTS: 3
+         IMPACT OF ACCOMPANYING SOFTWARE: 2
+          IMPACT OF ACCOMPANYING DATASET: 1
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+This paper is an extension of a previous word- or type-based
+unsupervised POS induction system to an instance- or token-based system.
+The method seems sound and the results are good; taking POS-ambiguity
+into account does not lead to large improvements, since ambiguity is not
+very rife (most words have a predominant or only a single tag), but
+given that ambiguity exists it is important to model it, especially
+since getting it wrong will severely negatively affect upstream tasks
+like parsing.
+
+The algorithm presented here combines the embeddings for the target
+token with embeddings of probable substitutes, and then performs k-means
+clusterings over these combination representations. The substitutes are
+calculated using a language model based on the current context,
+capturing distributional information, and disambiguating potentially
+ambiguous target words. This method seems to be highly effective, albeit
+dependent on a high-quality language model learned from large amounts of
+extra data.
+
+My principal concern with this paper, however, is that it is awkwardly
+structured and does not include sufficient detail about the algorithm.
+(My understanding of the algorithm outlined above is the result of
+looking up several cited papers.) Section 2, in which the algorithm is
+presented, is vague on many details.
+- If step 4 is omitted, is this algorithm equivalent to (Yatbaz et al,
+2012)?
+- Step 6 is relevant for evaluation, not the algorithm itself.
+Other sections seem out of context as well, for example the first
+paragraph in 3.3.
+I was not familiar with the CODE algorithm used in this paper and would
+have appreciated a more thorough description, potentially integrating
+the appendix into the rest of the paper.
+In particular, what is the effect of repeating certain values (those
+from morphological features) multiple times within the feature tuples,
+while others (the substitution features) only occur once? Will the
+redundant values be ignored or weighted more highly?
+
+The analyses are informative, though perhaps more verbose than
+necessary; I would have preferred a more thorough explanation of the
+algorithm instead. I also wonder how well this method does when
+constrained to using only the dataset (i.e. with a LM trained on the
+input data, rather than using LMs trained on large web corpora); I
+suspect not very well.
+
+Making a distinction between 'word' and 'instance' rather than
+'type' and 'token' is potentially confusing (to me, a 'word' can be
+either a type or a token, hence using those terms instead).
+
+Please 'float' the tables and the figures to the top of the page,
+instead of having them inline.
+
+============================================================================
+                            REVIEWER #3
+============================================================================
+
+
+---------------------------------------------------------------------------
+Reviewer's Scores
+---------------------------------------------------------------------------
+
+                         APPROPRIATENESS: 5
+                                 CLARITY: 3
+                             ORIGINALITY: 3
+                 SOUNDNESS / CORRECTNESS: 3
+                           REPLICABILITY: 4
+                   MEANINGFUL COMPARISON: 5
+                               SUBSTANCE: 2
+              IMPACT OF IDEAS OR RESULTS: 3
+         IMPACT OF ACCOMPANYING SOFTWARE: 1
+          IMPACT OF ACCOMPANYING DATASET: 1
+
+
+---------------------------------------------------------------------------
+Comments
+---------------------------------------------------------------------------
+
+The paper present a token level part-of-speech tagging method. The reported
+results are comparable with existing state-of-the-art.
+
+The paper is not written very clearly. The main idea is nice but the
+details of
+the method and the description of the results is hard to follow. Also the
+results do not clearly support the main claim. The result on English are
+actually worse than the previous type level version of the method. The
+details
+of the method are also scattered here and there and do not present a
+coherent
+picture.
+
+
+
+Best regards,
+
+Kristina Toutanova and Hua Wu
+ACL 2014
+
+
+
+-- 
+may-
+
+--089e013c621c02eb8504f2bc8ed0
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote">---------- Forwarded me=
+ssage ----------<br>From: <b class=3D"gmail_sendername"></b> <span dir=3D"l=
+tr">&lt;<a href=3D"mailto:acl2014pcchair@outlook.com">acl2014pcchair@outloo=
+k.com</a>&gt;</span><br>
+
+Date: Wed, Feb 19, 2014 at 8:20 AM<br>Subject: ACL 2014 Author Response Per=
+iod<br>To: <a href=3D"mailto:maliyatbaz@gmail.com">maliyatbaz@gmail.com</a>=
+<br>Cc: <a href=3D"mailto:acl2014pcchair@outlook.com">acl2014pcchair@outloo=
+k.com</a><br>
+
+<br><br>Dear Mehmet Ali Yatbaz:<br>
+<br>
+This letter regards the following submission to ACL 2014:<br>
+<br>
+=A0 =A0 Title: Unsupervised Instance-Based Part of Speech Induction<br>
+=A0 =A0 =A0 =A0 =A0 =A0Using Probable Substitutes<br>
+=A0 =A0Number: 233<br>
+=A0Passcode: 233X-B4F3B4B3A9<br>
+<br>
+Draft reviews of this submission are now available. In a small number of ca=
+ses, you will see that one reviewer has not yet uploaded a review -- we are=
+ hastily chasing such reviewers and additional reviews should be in very so=
+on.<br>
+
+
+<br>
+For a short time, you will have the opportunity to respond<br>
+to the reviews. You can enter your author response by 10 am (morning) on Fe=
+b 22, 2014. You may forward this email to your co-authors as they will not =
+have received this information.<br>
+<br>
+Your response should be limited to items such<br>
+as correcting factual errors in the reviews, answering questions<br>
+raised in the reviewer comments, and so on.<br>
+<br>
+You are requested NOT to use the response form to debate the<br>
+reviewers&#39; subjective opinions regarding the merit of your work.<br>
+Nor should you try to &quot;correct&quot; your paper in any way - either<br=
+>
+in terms of its basic technical arguments, or in the presentation<br>
+of those arguments. =A0Above all, the response facility should not<br>
+be used to report on new results, obtained since the submission<br>
+deadline closed.<br>
+<br>
+Of course, you are free to write whatever you wish to write.<br>
+That said, please note that this process is intended to help<br>
+produce more accurate REVIEWS for your paper. =A0It is not<br>
+intended to strengthen the arguments in your paper; moreover,<br>
+your remarks will not lead to changing the reviewers&#39; fundamental<br>
+perceptions of your work, as reflected in their reviews.<br>
+<br>
+If the paper is accepted, you will still have ample opportunity<br>
+to make revisions, i.e., before sending in your camera-ready copy.<br>
+<br>
+Your response should be entered by:<br>
+<br>
+=A0 =A0 =A0 =A0 10 am (morning) on Feb 22, 2014.<br>
+<br>
+<br>
+To make your response, go to the following URL:<br>
+<br>
+=A0 =A0 =A0<a href=3D"https://www.softconf.com/acl2014/papers/" target=3D"_=
+blank">https://www.softconf.com/acl2014/papers/</a><br>
+<br>
+You will be prompted to login to your START account. =A0If<br>
+you do not see your submission, you can access it with the<br>
+following passcode:<br>
+<br>
+=A0 =A0 =A0233X-B4F3B4B3A9<br>
+<br>
+<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+ACL 2014 Reviews for Submission #233<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+<br>
+Title: Unsupervised Instance-Based Part of Speech Induction Using Probable =
+Substitutes<br>
+<br>
+Authors: Mehmet Ali Yatbaz, Enis Rifat Sert and Deniz Yuret<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 REVIEWER #1<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Reviewer&#39;s Scores<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0APPROPRIATENESS: 5<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CLARITY:=
+ 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ORIGINALITY: 3<b=
+r>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SOUNDNESS / CORRECTNESS: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0REPLICABILITY: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0MEANINGFUL COMPARISON: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SUBSTANCE: 4=
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 IMPACT OF IDEAS OR RESULTS: 3<br>
+=A0 =A0 =A0 =A0 =A0IMPACT OF ACCOMPANYING SOFTWARE: 1<br>
+=A0 =A0 =A0 =A0 =A0 IMPACT OF ACCOMPANYING DATASET: 1<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Comments<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+This paper presents a token-level POS tagger. The tagger uses probable<br>
+substitutes as contextual features, and obtains strong results on various<b=
+r>
+settings. The paper is generally well written and presents nice results.<br=
+>
+<br>
+This paper is a token-level extension of the (Yatbaz et al., 2012) type-lev=
+el<br>
+tagger. Although the shift from type- to token-level is an important one, I=
+ do<br>
+not see the real contribution this paper has over (Yatbaz et al., 2012). Th=
+e<br>
+paper basically uses the same technology (probable substitutes, S-CODE<br>
+algorithm), and obtains similar (if not inferior) results on the only compa=
+red<br>
+dataset.<br>
+<br>
+Regarding the other set of contributions presented by the authors:<br>
+-- The S-Code part is only referred to in the conclusion and the appendix (=
+the<br>
+previous mention of this algorithm was short and did not imply anything<br>
+interesting). More explanations are required in order to understand the nov=
+elty<br>
+here. Moreover, as the authors have 1.5-2 pages left, this should have been=
+<br>
+part of the main paper.<br>
+-- The results presented in the paper are nice, although I am not convinced=
+ (as<br>
+no evidence is provided otherwise) that the proposed system performs any be=
+tter<br>
+than the 2012 paper.<br>
+-- With respect to the code release, the authors should have submitted it a=
+long<br>
+with the paper. Currently, it cannot be addressed in this review.<br>
+<br>
+Other comments:<br>
+<br>
+1. The term &quot;probable substitutes&quot; should be more carefully expla=
+ined.<br>
+2. I would have liked to see how the model behaves with different values of=
+ K<br>
+(for the K-means algorithm).<br>
+<br>
+Minor comment:<br>
+1. Table 1 is hard to interpret (bold numbers should indicate the highest<b=
+r>
+results only)<br>
+<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 REVIEWER #2<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Reviewer&#39;s Scores<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0APPROPRIATENESS: 5<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CLARITY:=
+ 3<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ORIGINALITY: 3<b=
+r>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SOUNDNESS / CORRECTNESS: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0REPLICABILITY: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0MEANINGFUL COMPARISON: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SUBSTANCE: 3=
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 IMPACT OF IDEAS OR RESULTS: 3<br>
+=A0 =A0 =A0 =A0 =A0IMPACT OF ACCOMPANYING SOFTWARE: 2<br>
+=A0 =A0 =A0 =A0 =A0 IMPACT OF ACCOMPANYING DATASET: 1<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Comments<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+This paper is an extension of a previous word- or type-based<br>
+unsupervised POS induction system to an instance- or token-based system.<br=
+>
+The method seems sound and the results are good; taking POS-ambiguity<br>
+into account does not lead to large improvements, since ambiguity is not<br=
+>
+very rife (most words have a predominant or only a single tag), but<br>
+given that ambiguity exists it is important to model it, especially<br>
+since getting it wrong will severely negatively affect upstream tasks<br>
+like parsing.<br>
+<br>
+The algorithm presented here combines the embeddings for the target<br>
+token with embeddings of probable substitutes, and then performs k-means<br=
+>
+clusterings over these combination representations. The substitutes are<br>
+calculated using a language model based on the current context,<br>
+capturing distributional information, and disambiguating potentially<br>
+ambiguous target words. This method seems to be highly effective, albeit<br=
+>
+dependent on a high-quality language model learned from large amounts of<br=
+>
+extra data.<br>
+<br>
+My principal concern with this paper, however, is that it is awkwardly<br>
+structured and does not include sufficient detail about the algorithm.<br>
+(My understanding of the algorithm outlined above is the result of<br>
+looking up several cited papers.) Section 2, in which the algorithm is<br>
+presented, is vague on many details.<br>
+- If step 4 is omitted, is this algorithm equivalent to (Yatbaz et al,<br>
+2012)?<br>
+- Step 6 is relevant for evaluation, not the algorithm itself.<br>
+Other sections seem out of context as well, for example the first<br>
+paragraph in 3.3.<br>
+I was not familiar with the CODE algorithm used in this paper and would<br>
+have appreciated a more thorough description, potentially integrating<br>
+the appendix into the rest of the paper.<br>
+In particular, what is the effect of repeating certain values (those<br>
+from morphological features) multiple times within the feature tuples,<br>
+while others (the substitution features) only occur once? Will the<br>
+redundant values be ignored or weighted more highly?<br>
+<br>
+The analyses are informative, though perhaps more verbose than<br>
+necessary; I would have preferred a more thorough explanation of the<br>
+algorithm instead. I also wonder how well this method does when<br>
+constrained to using only the dataset (i.e. with a LM trained on the<br>
+input data, rather than using LMs trained on large web corpora); I<br>
+suspect not very well.<br>
+<br>
+Making a distinction between &#39;word&#39; and &#39;instance&#39; rather t=
+han<br>
+&#39;type&#39; and &#39;token&#39; is potentially confusing (to me, a &#39;=
+word&#39; can be<br>
+either a type or a token, hence using those terms instead).<br>
+<br>
+Please &#39;float&#39; the tables and the figures to the top of the page,<b=
+r>
+instead of having them inline.<br>
+<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 REVIEWER #3<br>
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Reviewer&#39;s Scores<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0APPROPRIATENESS: 5<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0CLARITY:=
+ 3<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0ORIGINALITY: 3<b=
+r>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SOUNDNESS / CORRECTNESS: 3<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0REPLICABILITY: 4<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0MEANINGFUL COMPARISON: 5<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0SUBSTANCE: 2=
+<br>
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 IMPACT OF IDEAS OR RESULTS: 3<br>
+=A0 =A0 =A0 =A0 =A0IMPACT OF ACCOMPANYING SOFTWARE: 1<br>
+=A0 =A0 =A0 =A0 =A0 IMPACT OF ACCOMPANYING DATASET: 1<br>
+<br>
+<br>
+---------------------------------------------------------------------------=
+<br>
+Comments<br>
+---------------------------------------------------------------------------=
+<br>
+<br>
+The paper present a token level part-of-speech tagging method. The reported=
+<br>
+results are comparable with existing state-of-the-art.<br>
+<br>
+The paper is not written very clearly. The main idea is nice but the detail=
+s of<br>
+the method and the description of the results is hard to follow. Also the<b=
+r>
+results do not clearly support the main claim. The result on English are<br=
+>
+actually worse than the previous type level version of the method. The deta=
+ils<br>
+of the method are also scattered here and there and do not present a cohere=
+nt<br>
+picture.<br>
+<br>
+<br>
+<br>
+Best regards,<br>
+<br>
+Kristina Toutanova and Hua Wu<br>
+ACL 2014<br>
+</div><br><br clear=3D"all"><div><br></div>-- <br>may-<br>
+</div>
+
+--089e013c621c02eb8504f2bc8ed0--
