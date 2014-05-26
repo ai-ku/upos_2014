@@ -8,16 +8,19 @@ and 10 languages from the CoNLL-X shared task (Bulgarian, Czech, Danish, Dutch,
 German, Portuguese, Slovene, Spanish, Swedish and Turkish)
 \cite{Buchholz:2006:CST:1596276.1596305}.  
 
-To sample substitutes, we trained language models of Czech, Romanian, German,
-Portuguese, Spanish and Swedish with their corresponding TenTen corpora
-\cite{jakubivcek2013tenten}, and Bulgarian, Estonian, Hungarian, Slovene,
-Serbian, Danish, Dutch with their corresponding Wikipedia dump
+To sample substitutes, we trained language models of Bulgarian, Czech,
+Estonian, Romanian, Danish, German, Dutch, Portuguese, Spanish, Swedish and
+Turkish with their corresponding TenTen corpora \cite{jakubivcek2013tenten},
+and Hungarian, Slovene and Serbian with their corresponding Wikipedia dump
 files\footnote{Latest Wikipedia dump files are freely available at
   \url{http://dumps.wikimedia.org/} and the text in the dump files can be
-  extracted using WP2TXT (\url{http://wp2txt.rubyforge.org/})}.  For the
-  Turkish language modeling we use the web corpus collected from Turkish news
-  and blog sites \cite{sak2008turkish}.  We use ukWaC corpora to train English
-  language models.
+  extracted using WP2TXT (\url{http://wp2txt.rubyforge.org/})}.  Serbian shares
+  a common basis with Crotian and Bosnian therefore we trained 3 different
+  language models using Wikipedia dump files of Serbian together with these two
+  languages and measured the perplexities on the MULTEXT-East Serbian corpus.
+  We chose the Croatian language model since it achieved the lowest perplexity
+  score and unknown word ratio on MULTEXT-East Serbian corpus.  We use ukWaC
+  corpora to train English language models. 
 
 We used the default settings in Section~\ref{sec:expset} and incorporated only
 the orthographic features\footnote{All corpora (except German, Spanish and
@@ -43,26 +46,24 @@ state-of-the-art systems in Table~\ref{tab:multiresults} are word-based and
 incorporate morphological features. 
 \input{multibesttable_instance.tex}
 
-Our results are lower than the best systems on 6 out of 8 data-sets
-that use language models trained on the Wikipedia corpora.  TenTen,
-ukWaC and Turkish News corpora are cleaner and tokenized better
-compared to the Wikipedia corpora.  These corpora also have larger
-vocabulary sizes and lower out-of-vocabulary rates.  Thus language
-models trained on these corpora have much lower perplexities and
-generate better substitutes than the Wikipedia based models.  Our
-model has lower \vm\ scores in spite of good \mto\ scores on 15
-corpora which is discussed in Section~\ref{sec:discuss}.
+Our \mto\ results are lower than the best systems on all of data-sets that use
+language models trained on the Wikipedia corpora.  ukWaC and TenTen corpora are
+cleaner and tokenized better compared to the Wikipedia corpora.  These corpora
+also have larger vocabulary sizes and lower out-of-vocabulary rates.  Thus
+language models trained on these corpora have much lower perplexities and
+generate better substitutes than the Wikipedia based models.  Our model has
+lower \vm\ scores in spite of good \mto\ scores on 14 corpora which is
+discussed in Section~\ref{sec:discuss}.
 
-Among the languages for which clean language model corpora were
-available, our model performs comparable to or significantly better
-than the best systems on most languages.  We show significant
-improvements on MULTEXT-East Czech and Romanian, and comparable
-results on CoNLL-X Czech, German, Portuguese and Swedish in terms of the
-\mto\ score.  One reason for comparably low \mto\ on Spanish might be
-the absence of morphological features.  Our model achieves the
-state-of-the-art \mto\ on MULTEXT-East English and scores comparable
-\mto\ with the best model on WSJ.  Our model performs comparable to
-the best system on Turkish.
+Among the languages for which clean language model corpora were available, our
+model performs comparable to or significantly better than the best systems on
+most languages.  We show significant improvements on MULTEXT-East Czech,
+Romanian, and CoNLL-X Bulgarian.  Our model achieves the state-of-the-art \mto\
+on MULTEXT-East English and scores comparable \mto\ with the best model on WSJ.
+Our model shows comparable results on MULTEXT-East Bulgarian and Estonian, and
+CoNLL-X Czech, Danish, Dutch, German, Portuguese, Swedish and Turkish in terms
+of the \mto\ score.  One reason for comparably low \mto\ on Spanish might be
+the absence of morphological features.
 
 % TODO: describe the table.
 
