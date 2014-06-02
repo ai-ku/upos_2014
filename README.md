@@ -8,9 +8,9 @@ Mehmet Ali Yatbaz, Enis Sert, and Deniz Yuret.  2012.  Learning
 Syntactic Categories Using Paradigmatic Representations of Word
 Context.  EMNLP 2012.
 
-
-Mehmet Ali Yatbaz, Enis Sert, and Deniz Yuret. (Under review)  Unsupervised
-Instance-Based Part of Speech Induction Using Probable Substitutes
+Mehmet Ali Yatbaz, Enis Sert, and Deniz Yuret.  2014.  Unsupervised
+Instance-Based Part of Speech Induction Using Probable Substitutes.
+COLING 2014.
 
 DIRECTORY STRUCTURE:
 
