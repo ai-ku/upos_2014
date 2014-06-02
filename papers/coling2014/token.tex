@@ -5,13 +5,16 @@ Table~\ref{tab:results} shows that the overall many-to-one accuracy of
 our instance based induction system is comparable to
 \cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL}\footnote{The difference is
   not statistically significant at $p=0.05$.} and significantly higher
-than the other published results.  However Figure~\ref{fig:perplexity}
-suggests that this summary hides the large difference in the answers
-given by the different systems.  In this section we compare the
-performance of our instance-based model to the word-based model of
+than the other published results on the Penn Treebank.  However
+Figure~\ref{fig:perplexity} in the introduction suggests that this
+summary hides the large difference in the answers given by the
+different systems.  In this section we compare the performance of our
+instance-based model to the word-based model of
 \cite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} on word types at different
-levels of ambiguity.  We propose the gold-tag perplexity of a word as
-a measure of its degree of ambiguity defined as follows:
+levels of ambiguity using the English Penn Treebank results.
+
+We propose the gold-tag perplexity of a word as a measure of its
+degree of ambiguity defined as:
 \begin{equation*} \label{eq:tag-perp}
 GP(w) = 2^{H(p_w)} = 2^{-\sum_{t} p_w(t)log_2 p_w(t)}
 \end{equation*}
@@ -21,13 +24,13 @@ distribution.  A $GP$ of 1 for a word $w$ indicates that $w$ is always
 associated with the same POS tag.  A word with $N$ equally probable
 tags would have a $GP$ of $N$.
 
-Figure~\ref{fig:perplexity} in the introduction plots the gold-tag
-perplexity versus the smoothed \mto\ accuracy for the word-based and
-the instance-based POS induction systems.  To compose the plot, we
-found the best mapping from the induced clusters to the gold-standard
-tags, then we computed the \mto\ accuracy for each word using this
-mapping and plotted the \mto\ as a function of the word's $GP$.  We
-used the Nadaraya-Watson kernel regression estimate
+Figure~\ref{fig:perplexity} plots the gold-tag perplexity versus the
+smoothed \mto\ accuracy for the word-based and the instance-based POS
+induction systems on the Penn Treebank.  To compose the plot, we found
+the best mapping from the induced clusters to the gold-standard tags,
+then we computed the \mto\ accuracy for each word using this mapping
+and plotted the \mto\ as a function of the word's $GP$.  We used the
+Nadaraya-Watson kernel regression estimate
 \cite{nadaraya1964estimating,watson1964smooth} with normal kernel of
 bandwidth 1.0 to obtain smooth regression lines.  The figure shows
 that the performance of the instance-based induction model does not
