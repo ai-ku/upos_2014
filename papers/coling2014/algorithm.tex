@@ -107,8 +107,9 @@ feature value using the multi-variable version of the CODE algorithm
 described in \cite{globerson2007euclidean}.  Given two categorical
 variables $X$ and $Y$, the CODE algorithm constructs Euclidean
 embeddings (vectors) for each of their distinct values in the same
-space.  The distance between an $x$ vector and a $y$ vector is related
-to their joint distribution $p(x, y)$ as
+space.  The distance between the embedding of an $x$ value, $\phi(x)$,
+and the embedding of a $y$ value, $\psi(y)$, is related to their joint
+distribution $p(x, y)$ as
 follows\footnote{\cite{globerson2007euclidean} describes several ways
   to relate distances to probabilities, the model used here is the
   marginal-marginal (MM) model.}
@@ -117,20 +118,20 @@ follows\footnote{\cite{globerson2007euclidean} describes several ways
 
 \noindent where $\bar{p}$ represents empirical probabilities
 (frequencies from the training data), $d_{x,y}$ is the distance
-between the embeddings of $x$ and $y$ and $Z=\sum_{x,y} \bar{p}(x)
-\bar{p}(y) e^{-d^2_{x,y}}$ is a normalization constant.  Starting with
-random vectors for each distinct value of $x$ and $y$, we use
-stochastic gradient ascent to move the embedding vectors around to
-maximize the likelihood given by this model.  Calculating the
+between the embeddings $\phi(x)$ and $\psi(y)$ and $Z=\sum_{x,y}
+\bar{p}(x) \bar{p}(y) e^{-d^2_{x,y}}$ is a normalization constant.
+Starting with random vectors for each distinct value of $x$ and $y$,
+we use stochastic gradient ascent to move the embedding vectors around
+to maximize the likelihood given by this model.  Calculating the
 normalization constant $Z$ is the most expensive part of this
 procedure.  We solve this problem following \cite{maron2010sphere} who
-suggest that a constant $Z$ approximation can be used if the
-embedding vectors are kept on the unit sphere.
+suggest that a constant $Z$ approximation can be used if the embedding
+vectors are kept on the unit sphere.
 
 As Table~\ref{tab:sampleswithfeatures} shows, considering the target
 word and its contextual, morphological and orthographic features gives
-us more than two variables.  Yatbaz et
-al. \shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} adopt the two
+us more than two variables.  Yatbaz et al. 
+\shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} adopt the two
 variable CODE algorithm to this multi-variable case in an ad-hoc
 manner by considering the target word as $x$ and all other features as
 distinct $y$ values.  We implement the multi-variable extension of
@@ -140,11 +141,15 @@ optimizes the following likelihood function:
 \[ \ell(\phi, \psi^{(1)}, \ldots, \psi^{(K)}) = 
     \sum_{i=1}^K \sum_{w,f^{(i)}} \bar{p}(w,f^{(i)}) \log p(w,f^{(i)}) \]
 
-\noindent where $\phi$ are the embeddings of target words, $\psi^{(i)}$ are the
-embeddings for the values of the $i$'th feature $f^{(i)}$.  The set of
-$K$ bivariate CODE models
-$p(w,f^{(i)})$ share the same target word embeddings $\phi(w)$ but
-build their own feature embeddings $\psi^{(i)}(f^{(i)})$.
+\noindent where $w$ are the target words, $\phi$ are the embeddings of
+target words, $K$ is the number of different types of
+features\footnote{For example the number of features $K=4$ in
+  Table~\ref{tab:sampleswithfeatures}: Subst, Suf, Cap, and Num.},
+$f^{(i)}$ are the values of the $i$'th feature, and $\psi^{(i)}$ are
+the embeddings for the values of the $i$'th feature.  This extension
+can be seen as a set of $K$ bivariate CODE models $p(w,f^{(i)})$ that
+share the same target word embeddings $\phi(w)$ but build their own
+feature embeddings $\psi^{(i)}(f^{(i)})$.
 
 %% To handle co-occurrence tuples we use the modified version of S-CODE that can
 %% model more than two variables (see Appendix~\ref{app:multiscode}).  We feed
