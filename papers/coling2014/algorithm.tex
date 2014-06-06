@@ -105,22 +105,22 @@ representing a single instance.
 In step 3, we construct Euclidean embeddings for each unique word and
 feature value using the multi-variable version of the CODE algorithm
 described in \cite{globerson2007euclidean}.  Given two categorical
-variables $X$ and $Y$, the CODE algorithm constructs Euclidean
+variables $W$ and $F$, the CODE algorithm constructs Euclidean
 embeddings (vectors) for each of their distinct values in the same
-space.  The distance between the embedding of an $x$ value, $\phi(x)$,
-and the embedding of a $y$ value, $\psi(y)$, is related to their joint
-distribution $p(x, y)$ as
+space.  The distance between the embedding of an $w$ value, $\phi(w)$,
+and the embedding of a $f$ value, $\psi(f)$, is related to their joint
+distribution $p(w, f)$ as
 follows\footnote{\cite{globerson2007euclidean} describes several ways
   to relate distances to probabilities, the model used here is the
   marginal-marginal (MM) model.}
 
-\[ p(x,y) = \frac{1}{Z} \bar{p}(x) \bar{p}(y) e^{-d^2_{x,y}} \]
+\[ p(w,f) = \frac{1}{Z} \bar{p}(w) \bar{p}(f) e^{-d^2_{w,f}} \]
 
 \noindent where $\bar{p}$ represents empirical probabilities
-(frequencies from the training data), $d_{x,y}$ is the distance
-between the embeddings $\phi(x)$ and $\psi(y)$ and $Z=\sum_{x,y}
-\bar{p}(x) \bar{p}(y) e^{-d^2_{x,y}}$ is a normalization constant.
-Starting with random vectors for each distinct value of $x$ and $y$,
+(frequencies from the training data), $d_{w,f}$ is the distance
+between the embeddings $\phi(w)$ and $\psi(f)$ and $Z=\sum_{w,f}
+\bar{p}(w) \bar{p}(f) e^{-d^2_{w,f}}$ is a normalization constant.
+Starting with random vectors for each distinct value of $w$ and $f$,
 we use stochastic gradient ascent to move the embedding vectors around
 to maximize the likelihood given by this model.  Calculating the
 normalization constant $Z$ is the most expensive part of this
@@ -133,8 +133,8 @@ word and its contextual, morphological and orthographic features gives
 us more than two variables.  Yatbaz et al. 
 \shortcite{yatbaz-sert-yuret:2012:EMNLP-CoNLL} adopt the two
 variable CODE algorithm to this multi-variable case in an ad-hoc
-manner by considering the target word as $x$ and all other features as
-distinct $y$ values.  We implement the multi-variable extension of
+manner by considering the target word as $w$ and all other features as
+distinct $f$ values.  We implement the multi-variable extension of
 CODE suggested by \cite{globerson2007euclidean} (Section 6.2) which
 optimizes the following likelihood function:
 
